@@ -1087,50 +1087,41 @@ iframe:focus-visible {
 }
 
 .visual-wall {
-  display: grid;
-  align-items: start;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 1rem;
+  column-count: 2;
+  column-gap: 1rem;
 }
 
 .visual-card {
   position: relative;
-  display: block;
+  display: inline-flex;
+  width: 100%;
+  margin: 0 0 1rem;
   padding: 0;
   overflow: hidden;
   border: 0;
   background: #eef1f5;
   text-align: left;
   cursor: pointer;
-  grid-column: span 6;
-}
-
-.visual-card--portrait {
-  grid-column: span 4;
-}
-
-.visual-card:nth-child(2),
-.visual-card:nth-child(5) {
-  margin-top: 4rem;
+  vertical-align: top;
+  break-inside: avoid;
+  flex-direction: column;
 }
 
 .visual-card img {
   width: 100%;
-  max-height: 620px;
-  object-fit: cover;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
   transition: transform 500ms var(--ease-out);
 }
 
 .visual-caption {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  position: static;
   display: grid;
   min-height: 86px;
   padding: 1rem;
+  border-top: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(10px);
   grid-template-columns: 2.4rem minmax(0, 1fr);
 }
 
@@ -1673,11 +1664,6 @@ iframe:focus-visible {
     aspect-ratio: 16 / 7;
   }
 
-  .visual-card--portrait,
-  .visual-card {
-    grid-column: span 6;
-  }
-
   .detail-grid {
     grid-template-columns: minmax(0, 1.25fr) minmax(310px, 0.75fr);
   }
@@ -2075,6 +2061,7 @@ iframe:focus-visible {
 
   .visual-wall {
     display: flex;
+    column-count: 1;
     flex-direction: column;
   }
 

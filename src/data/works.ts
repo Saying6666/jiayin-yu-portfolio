@@ -82,7 +82,9 @@ export const works: Work[] = [
     date: '2022-12-14',
     platform: '红网·时刻',
     summary: '讨论 ChatGPT 带来的新奇体验，以及人们在情感陪伴与信息获取上的真实需求。',
+    cover: '/assets/covers/chatgpt-conversation.jpg',
     externalUrl: 'https://moment.rednet.cn/pc/content/646656/57/12146447.html',
+    orientation: 'landscape',
   },
   {
     id: 'lying-flat-travel',
@@ -93,7 +95,9 @@ export const works: Work[] = [
     date: '2023-01-03',
     platform: '红网·时刻',
     summary: '讨论年轻人如何借低强度旅行缓解社会疲劳，重新理解休息、效率与生活节奏。',
+    cover: '/assets/covers/lying-flat-travel.jpg',
     externalUrl: 'https://moment.rednet.cn/pc/content/646745/95/12199220.html',
+    orientation: 'landscape',
   },
   {
     id: 'recyclers',
@@ -396,8 +400,10 @@ export const works: Work[] = [
     kind: 'external',
     platform: '原创 H5',
     summary: '情节、素材、动画与图片均为原创的移动端互动叙事作品。',
+    cover: '/assets/covers/kite-h5.jpg',
     externalUrl: 'http://h5.founderfx.cn/h/v/aAaVpp',
     award: '第十届全国大学生新媒体创意大赛全国最具人气奖',
+    orientation: 'landscape',
   },
   {
     id: 'word-news',
@@ -408,6 +414,8 @@ export const works: Work[] = [
     date: '2021',
     platform: '视觉新闻练习',
     summary: '以字形结构承载新闻信息，将快递动物与在线诉讼两则议题转译为视觉文字。',
+    cover: '/assets/covers/word-news.jpg',
+    orientation: 'landscape',
   },
   {
     id: 'campus-art-plan',
@@ -418,7 +426,9 @@ export const works: Work[] = [
     date: '2024',
     platform: '活动策划与推文文案',
     summary: '从大赛主题、赛程、报名方式到奖项设置的完整校园活动传播策划。',
+    cover: '/assets/covers/campus-art-plan.jpg',
     role: '文字署名：贾银玉',
+    orientation: 'landscape',
   },
 ]
 
@@ -447,6 +457,6 @@ export const wechatWorks: Work[] = wechatUrls.map((url, index) => ({
   externalUrl: url,
 }))
 
-export const allWorks = [...works, ...wechatWorks]
+export const allWorks = works
 
 export const getWorkById = (id: string) => allWorks.find((work) => work.id === id)
