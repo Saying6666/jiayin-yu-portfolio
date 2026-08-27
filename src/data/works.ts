@@ -4,8 +4,8 @@ export const filters: Exclude<FilterKey, '全部'>[] = [
   '纪实影像',
   '评论写作',
   '深度报道',
-  '新媒体设计',
   '编辑排版',
+  '新媒体设计',
 ]
 
 export const works: Work[] = [
@@ -53,7 +53,7 @@ export const works: Work[] = [
     duration: '03:47',
     summary:
       '借用经典电影桥段，以诙谐叙事呈现民族药企的产品研发理念与品牌表达。',
-    cover: '/assets/covers/acne-film.jpg',
+    cover: '/assets/covers/acne-product.jpg',
     mediaSrc: '/assets/videos/acne-film.mp4',
     award: '大学生广告艺术节学院奖 2022 秋季征集大赛微电影类优秀奖',
     orientation: 'landscape',
@@ -343,30 +343,6 @@ export const works: Work[] = [
     orientation: 'portrait',
   },
   {
-    id: 'law-office',
-    title: 'ELF 动态·埃及办公室',
-    filter: '新媒体设计',
-    section: 'visual',
-    kind: 'image',
-    platform: '律所公众号头图',
-    summary: '以米白织物质感和中英文字标构建克制、专业的跨境法律传播头图。',
-    cover: '/assets/visuals/law-office.png',
-    mediaSrc: '/assets/visuals/law-office.png',
-    orientation: 'landscape',
-  },
-  {
-    id: 'law-investment',
-    title: '投资埃及',
-    filter: '新媒体设计',
-    section: 'visual',
-    kind: 'image',
-    platform: '律所公众号头图',
-    summary: '为跨境投资主题制作的米白金色系公众号视觉头图。',
-    cover: '/assets/visuals/law-investment.jpg',
-    mediaSrc: '/assets/visuals/law-investment.jpg',
-    orientation: 'landscape',
-  },
-  {
     id: 'law-honors',
     title: '律所荣誉长图',
     filter: '新媒体设计',
@@ -445,9 +421,24 @@ const wechatUrls = [
   'https://mp.weixin.qq.com/s/rX_63lZ8V0vQk0uzseKXHg',
 ]
 
+const wechatTitles = [
+  '不要小瞧那个收废品的人',
+  '重庆大学2024级新生大数据揭秘！',
+  '今天的重大，city不city啊~',
+  '@全体重大人，今天让我们一起来重温《重庆大学校歌》！',
+  '纳新倒计时八天 | 等待一个“新”上人',
+  '研会纳新 | 文化艺术部——“艺”梦为马，新章待绘',
+  '新生攻略 | 开学必备物品清单，准备齐全再出发！',
+  '新生攻略 | 重大各校区运动场馆秘籍，等你来解锁！',
+  '心动七夕 | 手作礼物，让爱更有温度',
+  '学术之星 | 复兴民族，誓作前锋，人物专访第一弹！',
+  '盛夏绽放，律梦飞扬 | 开启自律模式，拥抱夏日精彩',
+  '新生攻略|你好新同学，听过重大图书馆吗？',
+]
+
 export const wechatWorks: Work[] = wechatUrls.map((url, index) => ({
   id: `wechat-${String(index + 1).padStart(2, '0')}`,
-  title: `微信公众号推文 ${String(index + 1).padStart(2, '0')}`,
+  title: wechatTitles[index],
   filter: '新媒体设计',
   section: 'wechat',
   kind: 'external',

@@ -23,29 +23,24 @@ export function Hero() {
         </a>
       </div>
 
-      <div className="hero-stage" aria-label="代表性作品拼贴">
-        <figure className="stage-card stage-card--forum">
-          <img
-            src="/assets/visuals/academic-forum.png"
-            alt="第七届中国政治传播研究学术论坛会议手册封面"
-          />
-        </figure>
-        <figure className="stage-card stage-card--poster">
-          <img src="/assets/visuals/recruitment-poster.png" alt="融媒体运营部纳新海报" />
-        </figure>
-        <figure className="stage-card stage-card--event">
-          <img src="/assets/visuals/event-wall.png" alt="科普专题学习活动墙设计" />
-        </figure>
-        <figure className="stage-card stage-card--film">
-          <img src="/assets/covers/orange-revival-alt2.jpg" alt="橙香里的绿色复兴视频画面" />
-        </figure>
-
-        <div className="folio-spines" aria-hidden="true">
-          <span className="spine spine--blue">报道 / REPORT</span>
-          <span className="spine">特稿 / FEATURE</span>
-          <span className="spine spine--dark">影像 / VIDEO</span>
-          <span className="spine spine--lime">运营 / OPERATIONS</span>
-          <span className="spine">笔记 / NOTES</span>
+      <div className="hero-stage hero-stage--index" aria-label="编辑台视觉索引">
+        <div className="hero-index-sheet">
+          <span className="hero-index-corner hero-index-corner--top" aria-hidden="true" />
+          <span className="hero-index-meta">ARCHIVE / 2026—01</span>
+          <div className="hero-index-frame hero-index-frame--dark">
+            <span>FIELD NOTES</span>
+            <i aria-hidden="true" />
+            <b>01</b>
+          </div>
+          <figure className="hero-index-frame hero-index-frame--image">
+            <img src="/assets/visuals/editorial-board.jpg" alt="纸张、印刷定位线与胶片编排的编辑台视觉" />
+            <figcaption>CONTENT / CONTEXT / IMPACT</figcaption>
+          </figure>
+          <div className="hero-index-frame hero-index-frame--lime">
+            <span>MAKE IT LEGIBLE</span>
+            <b aria-hidden="true">→</b>
+          </div>
+          <span className="hero-index-corner hero-index-corner--bottom" aria-hidden="true" />
         </div>
       </div>
     </main>
