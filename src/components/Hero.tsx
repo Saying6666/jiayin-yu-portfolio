@@ -5,17 +5,17 @@ export function Hero() {
     <main id="top" className="hero section-shell">
       <div className="hero-copy">
         <h1>
-          把复杂议题，
+          让内容，
           <br />
-          讲成看得见的故事。
+          被看见
         </h1>
         <span className="hero-mark" aria-hidden="true" />
         <p>新闻写作 · 影像叙事 · 新媒体运营</p>
-        <a className="primary-action" href="#featured">
+        <a className="primary-action" href="#archive">
           浏览作品
           <ArrowRight aria-hidden="true" />
         </a>
-        <a className="scroll-cue" href="#featured">
+        <a className="scroll-cue" href="#archive">
           <span>
             <ArrowDown aria-hidden="true" />
           </span>

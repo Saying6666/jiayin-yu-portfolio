@@ -7,7 +7,7 @@ type HeaderProps = {
 }
 
 const links = [
-  { href: '#featured', label: '作品' },
+  { href: '#archive', label: '作品' },
   { href: '#about', label: '关于' },
 ]
 

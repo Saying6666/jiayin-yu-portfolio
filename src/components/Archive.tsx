@@ -3,25 +3,23 @@ import { ArrowRight, Plus } from 'lucide-react'
 import { allWorks, filters } from '../data/works'
 import type { FilterKey, Work } from '../types'
 
+type ArchiveFilter = Exclude<FilterKey, '全部'>
+
 type ArchiveProps = {
   onOpen: (work: Work) => void
 }
 
+const archiveWorks = allWorks.filter((work) => work.section !== 'lab' || work.id === 'book-layout')
+
 export function Archive({ onOpen }: ArchiveProps) {
-  const [activeFilter, setActiveFilter] = useState<FilterKey>('全部')
+  const [activeFilter, setActiveFilter] = useState<ArchiveFilter>('纪实影像')
   const [expanded, setExpanded] = useState(false)
 
-  const filtered = useMemo(
-    () =>
-      activeFilter === '全部'
-        ? allWorks
-        : allWorks.filter((work) => work.filter === activeFilter),
-    [activeFilter],
-  )
+  const filtered = useMemo(() => archiveWorks.filter((work) => work.filter === activeFilter), [activeFilter])
 
   const visible = expanded ? filtered : filtered.slice(0, 10)
 
-  const chooseFilter = (filter: FilterKey) => {
+  const chooseFilter = (filter: ArchiveFilter) => {
     setActiveFilter(filter)
     setExpanded(false)
   }
@@ -46,6 +44,7 @@ export function Archive({ onOpen }: ArchiveProps) {
             type="button"
             role="tab"
             aria-selected={activeFilter === filter}
+            aria-controls="archive-group-panel"
             className={activeFilter === filter ? 'is-active' : ''}
             onClick={() => chooseFilter(filter)}
           >
@@ -54,7 +53,17 @@ export function Archive({ onOpen }: ArchiveProps) {
         ))}
       </div>
 
-      <div className="archive-list">
+      <div className="archive-group-heading" aria-live="polite">
+        <div>
+          <span className="utility-line">
+            GROUP / {String(filters.indexOf(activeFilter) + 1).padStart(2, '0')}
+          </span>
+          <h3>{activeFilter}</h3>
+        </div>
+        <span>{filtered.length} 项</span>
+      </div>
+
+      <div id="archive-group-panel" className="archive-list" role="tabpanel" aria-label={`${activeFilter}作品`}>
         {visible.map((work, index) => (
           <button
             key={work.id}

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { AboutFooter } from './components/AboutFooter'
 import { Archive } from './components/Archive'
-import { FeaturedWorks } from './components/FeaturedWorks'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { MediaSections } from './components/MediaSections'
+import { VisibilitySignal } from './components/VisibilitySignal'
 import { WorkDialog } from './components/WorkDialog'
 import { getWorkById } from './data/works'
 import type { Work } from './types'
@@ -66,7 +66,7 @@ export default function App() {
         onNavigate={() => setMenuOpen(false)}
       />
       <Hero />
-      <FeaturedWorks onOpen={openWork} />
+      <VisibilitySignal />
       <Archive onOpen={openWork} />
       <MediaSections onOpen={openWork} />
       <AboutFooter />

@@ -1,10 +1,9 @@
 import type { FilterKey, Work } from '../types'
 
-export const filters: FilterKey[] = [
-  '全部',
+export const filters: Exclude<FilterKey, '全部'>[] = [
+  '纪实影像',
   '评论写作',
   '深度报道',
-  '纪实影像',
   '新媒体设计',
   '编辑排版',
 ]
