@@ -1,5 +1,3 @@
-import { ArrowDown, ArrowRight } from 'lucide-react'
-
 export function Hero() {
   return (
     <main id="top" className="hero section-shell">
@@ -11,16 +9,6 @@ export function Hero() {
         </h1>
         <span className="hero-mark" aria-hidden="true" />
         <p>新闻写作 · 影像叙事 · 新媒体运营</p>
-        <a className="primary-action" href="#archive">
-          浏览作品
-          <ArrowRight aria-hidden="true" />
-        </a>
-        <a className="scroll-cue" href="#archive">
-          <span>
-            <ArrowDown aria-hidden="true" />
-          </span>
-          向下滚动，探索更多作品
-        </a>
       </div>
 
       <div className="hero-stage hero-stage--index" aria-label="编辑台视觉索引">

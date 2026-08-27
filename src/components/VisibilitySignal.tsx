@@ -1,3 +1,5 @@
+import { ArrowDown, ArrowRight } from 'lucide-react'
+
 export function VisibilitySignal() {
   return (
     <section id="visibility" className="editorial-section section-shell reveal">
@@ -10,6 +12,18 @@ export function VisibilitySignal() {
             被看见
           </h2>
           <p>好的内容不只是说了什么，还包括它如何被看到和记住</p>
+          <div className="editorial-spread-actions">
+            <a className="primary-action" href="#archive">
+              浏览作品
+              <ArrowRight aria-hidden="true" />
+            </a>
+            <a className="scroll-cue" href="#archive">
+              <span>
+                <ArrowDown aria-hidden="true" />
+              </span>
+              向下滚动，探索更多作品
+            </a>
+          </div>
           <div className="editorial-spread-rule" aria-hidden="true" />
           <span className="editorial-spread-note">LAYOUT / IMAGE / RHYTHM</span>
         </div>

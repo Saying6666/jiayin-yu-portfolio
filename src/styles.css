@@ -780,6 +780,29 @@ iframe:focus-visible {
   line-height: 1.75;
 }
 
+.editorial-spread-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.4rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.editorial-spread-actions .primary-action {
+  border-color: var(--signal-blue);
+}
+
+.editorial-spread-actions .scroll-cue {
+  margin-top: 0;
+  color: #d5d9e0;
+}
+
+.editorial-spread-actions .scroll-cue span {
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
 .editorial-spread-rule {
   position: relative;
   z-index: 1;
@@ -791,6 +814,8 @@ iframe:focus-visible {
 }
 
 .editorial-spread-note {
+  position: relative;
+  z-index: 1;
   color: #aab2c0;
 }
 
