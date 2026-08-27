@@ -53,7 +53,7 @@ export const works: Work[] = [
     duration: '03:47',
     summary:
       '借用经典电影桥段，以诙谐叙事呈现民族药企的产品研发理念与品牌表达。',
-    cover: '/assets/covers/acne-product.jpg',
+    cover: '/assets/covers/acne-film-frame.jpg',
     mediaSrc: '/assets/videos/acne-film.mp4',
     award: '大学生广告艺术节学院奖 2022 秋季征集大赛微电影类优秀奖',
     orientation: 'landscape',
