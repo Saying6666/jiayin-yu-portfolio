@@ -433,7 +433,6 @@ const wechatTitles = [
   '心动七夕 | 手作礼物，让爱更有温度',
   '学术之星 | 复兴民族，誓作前锋，人物专访第一弹！',
   '盛夏绽放，律梦飞扬 | 开启自律模式，拥抱夏日精彩',
-  '新生攻略|你好新同学，听过重大图书馆吗？',
 ]
 
 export const wechatWorks: Work[] = wechatUrls.map((url, index) => ({
