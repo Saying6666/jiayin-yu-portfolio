@@ -7,8 +7,6 @@ export function Hero() {
           <br />
           被看见
         </h1>
-        <span className="hero-mark" aria-hidden="true" />
-        <p>新闻写作 · 影像叙事 · 新媒体运营</p>
       </div>
 
       <div className="hero-stage hero-stage--index" aria-label="编辑台视觉索引">
