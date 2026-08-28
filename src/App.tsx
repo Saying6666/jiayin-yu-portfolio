@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { AboutFooter } from './components/AboutFooter'
 import { Archive } from './components/Archive'
 import { Header } from './components/Header'
-import { Hero } from './components/Hero'
 import { MediaSections } from './components/MediaSections'
 import { VisibilitySignal } from './components/VisibilitySignal'
 import { WorkDialog } from './components/WorkDialog'
@@ -65,7 +64,6 @@ export default function App() {
         onMenuToggle={() => setMenuOpen((open) => !open)}
         onNavigate={() => setMenuOpen(false)}
       />
-      <Hero />
       <VisibilitySignal />
       <Archive onOpen={openWork} />
       <MediaSections onOpen={openWork} />

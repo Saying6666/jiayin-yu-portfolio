@@ -13,7 +13,7 @@ const archiveWorks = allWorks.filter((work) => work.section !== 'lab' || work.id
 
 export function Archive({ onOpen }: ArchiveProps) {
   return (
-    <section id="archive" className="archive archive--stack section-shell reveal">
+    <section id="archive" className="archive archive--stack section-shell">
       <div className="archive-title-row">
         <div>
           <h2>全部作品</h2>
