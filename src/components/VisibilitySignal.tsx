@@ -5,7 +5,15 @@ export function VisibilitySignal() {
     <section id="visibility" className="editorial-section section-shell reveal">
       <div className="editorial-spread">
         <div className="editorial-spread-copy">
-          <span className="editorial-spread-index">02—03 / EDITORIAL BOARD</span>
+          <span className="editorial-spread-index">LAYOUT / IMAGE / RHYTHM</span>
+          <div className="visibility-mark" aria-hidden="true">
+            <svg viewBox="0 0 180 132" role="presentation">
+              <circle className="visibility-mark-orbit" cx="90" cy="62" r="43" />
+              <circle className="visibility-mark-core" cx="90" cy="62" r="18" />
+              <path className="visibility-mark-swoop" d="M18 97C42 119 72 112 90 62S138 6 162 34" />
+              <circle className="visibility-mark-point" cx="90" cy="62" r="3.5" />
+            </svg>
+          </div>
           <h2>
             让内容，
             <br />
@@ -25,7 +33,6 @@ export function VisibilitySignal() {
             </a>
           </div>
           <div className="editorial-spread-rule" aria-hidden="true" />
-          <span className="editorial-spread-note">LAYOUT / IMAGE / RHYTHM</span>
         </div>
 
         <figure className="editorial-spread-image">

@@ -720,7 +720,7 @@ iframe:focus-visible {
   background: var(--ink);
   color: #fff;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .editorial-spread-copy::before {
@@ -759,10 +759,88 @@ iframe:focus-visible {
   color: var(--electric-lime);
 }
 
+.visibility-mark {
+  width: clamp(9.5rem, 17vw, 13rem);
+  height: clamp(7rem, 12vw, 9rem);
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  color: var(--electric-lime);
+}
+
+.visibility-mark svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.visibility-mark-orbit,
+.visibility-mark-core,
+.visibility-mark-swoop {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.visibility-mark-orbit {
+  stroke: rgba(255, 255, 255, 0.58);
+  stroke-width: 1.2;
+  stroke-dasharray: 2 6;
+  transform-origin: 90px 62px;
+  animation: visibility-orbit 18s linear infinite;
+}
+
+.visibility-mark-core {
+  stroke: #fff;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 7px rgba(189, 255, 0, 0.32));
+}
+
+.visibility-mark-swoop {
+  stroke: var(--electric-lime);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 130 220;
+  filter: drop-shadow(0 0 6px rgba(189, 255, 0, 0.38));
+  animation: visibility-trace 3.8s var(--ease-out) infinite alternate;
+}
+
+.visibility-mark-point {
+  fill: var(--electric-lime);
+  filter: drop-shadow(0 0 8px rgba(189, 255, 0, 0.85));
+  animation: visibility-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes visibility-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes visibility-trace {
+  from {
+    stroke-dashoffset: 110;
+  }
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+@keyframes visibility-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.85);
+    transform-origin: 90px 62px;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+    transform-origin: 90px 62px;
+  }
+}
+
 .editorial-spread-copy h2 {
   position: relative;
   z-index: 1;
-  margin: 2rem 0 0;
+  margin: 0.7rem 0 0;
   font-family: var(--display);
   font-size: clamp(3.2rem, 6vw, 6.5rem);
   font-weight: 950;
@@ -774,7 +852,7 @@ iframe:focus-visible {
   position: relative;
   z-index: 1;
   max-width: 19em;
-  margin: 1.8rem 0 0;
+  margin: 1.5rem 0 0;
   color: #d5d9e0;
   font-size: clamp(1rem, 1.45vw, 1.2rem);
   line-height: 1.75;
@@ -3333,6 +3411,12 @@ iframe:focus-visible {
     left: 0.8rem;
     padding: 0.65rem 0.7rem;
     font-size: 0.56rem;
+  }
+
+  .visibility-mark {
+    width: 9rem;
+    height: 6.7rem;
+    margin-top: 1.6rem;
   }
 }
 
