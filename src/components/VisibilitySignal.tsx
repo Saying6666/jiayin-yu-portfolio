@@ -41,7 +41,7 @@ export function VisibilitySignal() {
             alt="纸张、印刷定位线与胶片编排的编辑台视觉"
           />
           <figcaption>
-            <span>EDITORIAL BOARD</span>
+            <span>VISUAL INDEX</span>
             <b>03 / 24</b>
           </figcaption>
         </figure>
