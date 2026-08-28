@@ -37,7 +37,7 @@ export function AboutFooter() {
           </div>
 
           <a className="footer-action" href="#top">
-            回到顶部
+            ↑ BACK TO TOP
             <ArrowUpRight aria-hidden="true" />
           </a>
         </div>

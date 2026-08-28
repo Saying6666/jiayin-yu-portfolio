@@ -139,9 +139,6 @@ export function WorkDialog({ work, onClose }: WorkDialogProps) {
         <div className="detail-grid">
           <div className={`detail-media detail-media--${work.kind}`}>
             <MediaView work={work} />
-            {work.kind === 'article' && (
-              <span className="ai-cover-note">AI 视觉封面 · 非新闻现场影像</span>
-            )}
           </div>
 
           <aside className="detail-sidebar">

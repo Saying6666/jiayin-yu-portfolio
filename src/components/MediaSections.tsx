@@ -23,7 +23,12 @@ export function MediaSections({ onOpen }: MediaSectionsProps) {
 
         <div className="lab-list" role="list">
           {lab.map((work, index) => (
-            <button key={work.id} type="button" onClick={() => onOpen(work)}>
+            <button
+              key={work.id}
+              type="button"
+              className={`cross-media-item cross-media-item--${index + 1}`}
+              onClick={() => onOpen(work)}
+            >
               <span>{String(index + 1).padStart(2, '0')}</span>
               <span className="lab-thumb">
                 {work.cover ? <img src={work.cover} alt="" loading="lazy" /> : <span />}
@@ -77,24 +82,37 @@ export function MediaSections({ onOpen }: MediaSectionsProps) {
             <h2>公众号作品</h2>
             <p>公众号内容创作与专题传播实践。</p>
           </div>
-          <ol className="wechat-index">
-            {wechatWorks.map((work, index) => (
-              <li key={work.id}>
-                <a href={work.externalUrl} target="_blank" rel="noreferrer">
-                  <span className="wechat-thumb" aria-hidden="true">
-                    <b>{String(index + 1).padStart(2, '0')}</b>
-                    <i />
-                    <i />
-                  </span>
-                  <span className="wechat-copy">
-                    <span>WECHAT / {String(index + 1).padStart(2, '0')}</span>
-                    <strong>{work.title}</strong>
-                  </span>
-                  <ExternalLink aria-hidden="true" />
-                </a>
-              </li>
-            ))}
-          </ol>
+          <div className="wechat-output">
+            <div className="wechat-samples" aria-label="精选排版切片">
+              {visual.slice(0, 3).map((work, index) => (
+                <figure key={work.id} className={`wechat-sample wechat-sample--${index + 1}`}>
+                  <img src={work.cover} alt="" loading="lazy" />
+                  <figcaption>
+                    <span>排版切片 / {String(index + 1).padStart(2, '0')}</span>
+                    <b>{work.title}</b>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+            <ol className="wechat-index">
+              {wechatWorks.map((work, index) => (
+                <li key={work.id}>
+                  <a href={work.externalUrl} target="_blank" rel="noreferrer">
+                    <span className="wechat-thumb" aria-hidden="true">
+                      <b>{String(index + 1).padStart(2, '0')}</b>
+                      <i />
+                      <i />
+                    </span>
+                    <span className="wechat-copy">
+                      <span>WECHAT / {String(index + 1).padStart(2, '0')}</span>
+                      <strong>{work.title}</strong>
+                    </span>
+                    <ExternalLink aria-hidden="true" />
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </section>
     </>

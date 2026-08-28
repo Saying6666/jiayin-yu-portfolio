@@ -34,6 +34,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: clip;
   background: var(--paper);
   color: var(--ink);
 }
@@ -3437,5 +3438,272 @@ iframe:focus-visible {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Latest revision: give the cross-media archive a clear lead work, keep
+   full-height visual assets readable, and turn the WeChat index into a
+   thumbnail-led editorial spread. */
+.cross-media-section .cross-media-item {
+  min-height: 154px;
+  grid-template-columns: 3.5rem minmax(180px, 260px) minmax(0, 1fr) 1.5rem;
+}
+
+.cross-media-section .cross-media-item .lab-thumb {
+  height: 126px;
+}
+
+.cross-media-section .cross-media-item--1 {
+  min-height: 278px;
+  padding-block: 1.15rem;
+  background: linear-gradient(105deg, rgba(6, 70, 220, 0.07), rgba(189, 255, 0, 0.08));
+}
+
+.cross-media-section .cross-media-item--1 .lab-thumb {
+  height: 242px;
+}
+
+.cross-media-section .cross-media-item--1 .lab-copy strong {
+  max-width: 15ch;
+  font-size: clamp(1.55rem, 3vw, 2.7rem);
+  line-height: 1.12;
+}
+
+.cross-media-section .cross-media-item:not(.cross-media-item--1) .lab-copy strong {
+  font-size: clamp(1.2rem, 2.25vw, 1.9rem);
+}
+
+.cross-media-section .lab-thumb img {
+  object-position: center;
+}
+
+.new-media-section::before {
+  background:
+    linear-gradient(145deg, rgba(6, 70, 220, 0.17), transparent 38%),
+    linear-gradient(315deg, rgba(189, 255, 0, 0.17), transparent 44%),
+    #e8edf5;
+}
+
+.new-media-card--2 .new-media-media,
+.new-media-card--4 .new-media-media {
+  display: grid;
+  min-height: 0;
+  aspect-ratio: auto;
+  place-items: center;
+  background: #fff;
+}
+
+.new-media-card--2 .new-media-media {
+  aspect-ratio: 16 / 9;
+}
+
+.new-media-card--4 .new-media-media {
+  align-items: start;
+}
+
+.new-media-card--2 .new-media-media img,
+.new-media-card--4 .new-media-media img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.new-media-card--2 .new-media-media img {
+  max-height: 520px;
+}
+
+.wechat-output {
+  min-width: 0;
+}
+
+.wechat-samples {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+  grid-template-rows: repeat(2, minmax(150px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 2.1rem;
+}
+
+.wechat-sample {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: #0a3bbb;
+}
+
+.wechat-sample--1 {
+  grid-row: 1 / -1;
+}
+
+.wechat-sample img {
+  width: 100%;
+  height: 100%;
+  min-height: 170px;
+  object-fit: cover;
+  opacity: 0.88;
+  transition: transform 500ms var(--ease-out), opacity 250ms ease;
+}
+
+.wechat-sample:hover img {
+  opacity: 1;
+  transform: scale(1.035);
+}
+
+.wechat-sample figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.75rem;
+  background: linear-gradient(transparent, rgba(8, 11, 15, 0.86));
+}
+
+.wechat-sample figcaption span {
+  color: var(--electric-lime);
+  font-family: var(--utility);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+}
+
+.wechat-sample figcaption b {
+  font-size: 0.84rem;
+  line-height: 1.25;
+}
+
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 80% 16%, rgba(6, 70, 220, 0.22), transparent 34%),
+    radial-gradient(circle at 20% 80%, rgba(189, 255, 0, 0.08), transparent 34%),
+    #080b0f;
+}
+
+.site-footer::before {
+  position: absolute;
+  top: 1.5rem;
+  right: 6vw;
+  width: min(30vw, 360px);
+  height: min(30vw, 360px);
+  border: 1px solid rgba(189, 255, 0, 0.16);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.footer-brand {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  letter-spacing: 0.12em;
+}
+
+.footer-brand::after {
+  display: block;
+  width: 2.4rem;
+  height: 2px;
+  background: var(--electric-lime);
+  content: "";
+}
+
+.footer-grid h2 {
+  max-width: 11ch;
+  font-size: clamp(3.4rem, 7vw, 8.4rem);
+  line-height: 0.96;
+  text-shadow: 0 0 26px rgba(255, 255, 255, 0.08);
+}
+
+.site-footer .contact-list > div {
+  border-bottom: 0;
+  grid-template-columns: minmax(4.5rem, 0.35fr) minmax(0, 1fr);
+}
+
+.site-footer .contact-list dt {
+  text-align: right;
+}
+
+.site-footer .contact-list dd {
+  text-align: left;
+}
+
+.footer-contact .footer-action {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--electric-lime);
+  font-family: var(--utility);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.footer-contact .footer-action svg {
+  width: 1rem;
+}
+
+@media (max-width: 860px) {
+  .cross-media-section .cross-media-item,
+  .cross-media-section .cross-media-item--1 {
+    min-height: 190px;
+    grid-template-columns: 2.2rem 108px minmax(0, 1fr) 1.2rem;
+  }
+
+  .cross-media-section .cross-media-item .lab-thumb,
+  .cross-media-section .cross-media-item--1 .lab-thumb {
+    height: 142px;
+  }
+
+  .cross-media-section .cross-media-item--1 .lab-copy strong {
+    font-size: 1.45rem;
+  }
+
+  .wechat-samples {
+    grid-template-rows: repeat(2, minmax(130px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .cross-media-section .cross-media-item,
+  .cross-media-section .cross-media-item--1 {
+    min-height: 150px;
+    grid-template-columns: 2.2rem 72px minmax(0, 1fr) 1.2rem;
+  }
+
+  .cross-media-section .cross-media-item .lab-thumb,
+  .cross-media-section .cross-media-item--1 .lab-thumb {
+    height: 108px;
+  }
+
+  .cross-media-section .cross-media-item--1 .lab-copy strong,
+  .cross-media-section .cross-media-item:not(.cross-media-item--1) .lab-copy strong {
+    font-size: 1rem;
+  }
+
+  .wechat-samples {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 180px 120px;
+  }
+
+  .wechat-sample--1 {
+    grid-row: 1 / -1;
+  }
+
+  .wechat-sample figcaption {
+    padding: 0.55rem;
+  }
+
+  .wechat-sample figcaption b {
+    font-size: 0.72rem;
+  }
+
+  .site-footer .contact-list > div {
+    grid-template-columns: 4.2rem minmax(0, 1fr);
   }
 }
