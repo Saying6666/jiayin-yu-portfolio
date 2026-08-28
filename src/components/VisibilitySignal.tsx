@@ -42,7 +42,6 @@ export function VisibilitySignal() {
           />
           <figcaption>
             <span>VISUAL INDEX</span>
-            <b>03 / 24</b>
           </figcaption>
         </figure>
       </div>

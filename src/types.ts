@@ -27,6 +27,7 @@ export type Work = {
   quote?: string
   cover?: string
   mediaSrc?: string
+  mediaPages?: string[]
   contentSrc?: string
   externalUrl?: string
   award?: string

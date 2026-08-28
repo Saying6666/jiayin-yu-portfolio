@@ -9,6 +9,23 @@ type WorkDialogProps = {
 }
 
 function MediaView({ work }: { work: Work }) {
+  if (work.mediaPages?.length) {
+    return (
+      <div className="document-pages" aria-label={`${work.title} 全部页面`}>
+        {work.mediaPages.map((page, pageIndex) => (
+          <figure key={page}>
+            <img
+              src={page}
+              alt={`${work.title} 第 ${pageIndex + 1} 页`}
+              loading={pageIndex === 0 ? 'eager' : 'lazy'}
+            />
+            <figcaption>{String(pageIndex + 1).padStart(2, '0')}</figcaption>
+          </figure>
+        ))}
+      </div>
+    )
+  }
+
   if (work.kind === 'video' && work.mediaSrc) {
     return (
       <video controls preload="metadata" poster={work.cover}>
@@ -26,6 +43,10 @@ function MediaView({ work }: { work: Work }) {
         loading="lazy"
       />
     )
+  }
+
+  if (work.kind === 'document' && work.mediaSrc) {
+    return <iframe src={work.mediaSrc} title={`${work.title} 文档阅读器`} loading="lazy" />
   }
 
   if ((work.kind === 'image' || work.kind === 'article') && work.cover) {

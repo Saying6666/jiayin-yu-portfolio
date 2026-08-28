@@ -1,4 +1,5 @@
-import { ArrowRight, ExternalLink } from 'lucide-react'
+import { useState } from 'react'
+import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react'
 import { wechatWorks, works } from '../data/works'
 import type { Work } from '../types'
 
@@ -9,6 +10,15 @@ type MediaSectionsProps = {
 export function MediaSections({ onOpen }: MediaSectionsProps) {
   const lab = works.filter((work) => work.section === 'lab' && work.id !== 'book-layout')
   const visual = works.filter((work) => work.section === 'visual')
+  const [activeVisual, setActiveVisual] = useState(0)
+
+  const showPreviousVisual = () => {
+    setActiveVisual((current) => (current - 1 + visual.length) % visual.length)
+  }
+
+  const showNextVisual = () => {
+    setActiveVisual((current) => (current + 1) % visual.length)
+  }
 
   return (
     <>
@@ -21,7 +31,7 @@ export function MediaSections({ onOpen }: MediaSectionsProps) {
           <p>让文字、影像与交互在同一条叙事线上相遇。</p>
         </div>
 
-        <div className="lab-list" role="list">
+        <div className="lab-list cross-media-grid" role="list">
           {lab.map((work, index) => (
             <button
               key={work.id}
@@ -53,25 +63,57 @@ export function MediaSections({ onOpen }: MediaSectionsProps) {
           <span className="new-media-count">{String(visual.length).padStart(2, '0')} / VISUAL</span>
         </div>
 
-        <div className="new-media-grid" role="list">
-          {visual.map((work, index) => (
-            <button
-              key={work.id}
-              type="button"
-              className={`new-media-card new-media-card--${index + 1}`}
-              onClick={() => onOpen(work)}
+        <div className="visual-carousel" aria-roledescription="carousel" aria-label="新媒体设计作品">
+          <div className="visual-carousel-viewport">
+            <div
+              className="visual-carousel-track"
+              style={{ transform: `translate3d(-${activeVisual * 100}%, 0, 0)` }}
             >
-              <span className="new-media-media">
-                {work.cover ? <img src={work.cover} alt="" loading="lazy" /> : <span className="type-cover" />}
-                <span className="new-media-index">{String(index + 1).padStart(2, '0')}</span>
-              </span>
-              <span className="new-media-copy">
-                <span className="utility-line">{work.platform ?? 'VISUAL SYSTEM'}</span>
-                <strong>{work.title}</strong>
-                <ArrowRight aria-hidden="true" />
-              </span>
+              {visual.map((work, index) => (
+                <button
+                  key={work.id}
+                  type="button"
+                  className={`visual-slide ${index === activeVisual ? 'is-active' : ''}`}
+                  tabIndex={index === activeVisual ? 0 : -1}
+                  onClick={() => onOpen(work)}
+                >
+                  <span className="visual-slide-media">
+                    {work.cover ? <img src={work.cover} alt="" loading={index === 0 ? 'eager' : 'lazy'} /> : null}
+                  </span>
+                  <span className="visual-slide-copy">
+                    <span className="utility-line">
+                      {String(index + 1).padStart(2, '0')} / {work.platform ?? 'VISUAL SYSTEM'}
+                    </span>
+                    <strong>{work.title}</strong>
+                    <span>{work.summary}</span>
+                    <ArrowRight aria-hidden="true" />
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="visual-carousel-controls">
+            <button type="button" onClick={showPreviousVisual} aria-label="上一件新媒体作品">
+              <ArrowLeft aria-hidden="true" />
             </button>
-          ))}
+            <div className="visual-carousel-dots" aria-label="选择新媒体作品">
+              {visual.map((work, index) => (
+                <button
+                  key={work.id}
+                  type="button"
+                  className={index === activeVisual ? 'is-active' : ''}
+                  onClick={() => setActiveVisual(index)}
+                  aria-label={`查看第 ${index + 1} 件：${work.title}`}
+                  aria-current={index === activeVisual ? 'true' : undefined}
+                />
+              ))}
+            </div>
+            <span>{String(activeVisual + 1).padStart(2, '0')} / {String(visual.length).padStart(2, '0')}</span>
+            <button type="button" onClick={showNextVisual} aria-label="下一件新媒体作品">
+              <ArrowRight aria-hidden="true" />
+            </button>
+          </div>
         </div>
       </section>
 
@@ -83,17 +125,6 @@ export function MediaSections({ onOpen }: MediaSectionsProps) {
             <p>公众号内容创作与专题传播实践。</p>
           </div>
           <div className="wechat-output">
-            <div className="wechat-samples" aria-label="精选排版切片">
-              {visual.slice(0, 3).map((work, index) => (
-                <figure key={work.id} className={`wechat-sample wechat-sample--${index + 1}`}>
-                  <img src={work.cover} alt="" loading="lazy" />
-                  <figcaption>
-                    <span>排版切片 / {String(index + 1).padStart(2, '0')}</span>
-                    <b>{work.title}</b>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
             <ol className="wechat-index">
               {wechatWorks.map((work, index) => (
                 <li key={work.id}>
