@@ -2,13 +2,13 @@ import { ArrowRight } from 'lucide-react'
 import { allWorks } from '../data/works'
 import type { FilterKey, Work } from '../types'
 
-type ArchiveFilter = Extract<FilterKey, '纪实影像' | '评论写作' | '深度报道' | '编辑排版'>
+type ArchiveFilter = Extract<FilterKey, '纪实影像' | '评论写作' | '深度报道' | '编辑排版' | '新媒体设计'>
 
 type ArchiveProps = {
   onOpen: (work: Work) => void
 }
 
-const archiveGroups: ArchiveFilter[] = ['纪实影像', '评论写作', '深度报道', '编辑排版']
+const archiveGroups: ArchiveFilter[] = ['纪实影像', '评论写作', '深度报道', '编辑排版', '新媒体设计']
 const archiveWorks = allWorks.filter((work) => work.section !== 'lab' || work.id === 'book-layout')
 
 export function Archive({ onOpen }: ArchiveProps) {
