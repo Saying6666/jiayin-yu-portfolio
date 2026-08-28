@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { allWorks } from '../data/works'
 import type { FilterKey, Work } from '../types'
@@ -16,11 +15,6 @@ const archiveWorks = allWorks.filter(
 )
 
 export function Archive({ onOpen }: ArchiveProps) {
-  const [activeFilter, setActiveFilter] = useState<ArchiveFilter>('纪实影像')
-  const activeGroupIndex = archiveGroups.indexOf(activeFilter)
-  const groupedWorks = archiveWorks.filter((work) => work.filter === activeFilter)
-  const headingId = `archive-group-${activeGroupIndex + 1}`
-
   return (
     <section id="archive" className="archive archive--stack section-shell">
       <div className="archive-title-row">
@@ -34,74 +28,61 @@ export function Archive({ onOpen }: ArchiveProps) {
         </span>
       </div>
 
-      <div className="filter-rail" role="tablist" aria-label="全部作品分组">
-        {archiveGroups.map((filter, index) => (
-          <button
-            key={filter}
-            id={`archive-tab-${index + 1}`}
-            type="button"
-            role="tab"
-            aria-selected={activeFilter === filter}
-            aria-controls={`archive-panel-${index + 1}`}
-            className={activeFilter === filter ? 'is-active' : ''}
-            onClick={() => setActiveFilter(filter)}
-          >
-            <span>{String(index + 1).padStart(2, '0')}</span>
-            {filter}
-          </button>
-        ))}
-      </div>
-
       <div className="archive-stack">
-        <section
-          key={activeFilter}
-          id={`archive-panel-${activeGroupIndex + 1}`}
-          className={`archive-group archive-group--${activeGroupIndex + 1}`}
-          role="tabpanel"
-          aria-labelledby={`archive-tab-${activeGroupIndex + 1}`}
-        >
-          <div className="archive-group-heading">
-            <div>
-              <span className="utility-line">GROUP / {String(activeGroupIndex + 1).padStart(2, '0')}</span>
-              <h3 id={headingId}>{activeFilter}</h3>
-            </div>
-            <span>{groupedWorks.length} 项</span>
-          </div>
+        {archiveGroups.map((filter, groupIndex) => {
+          const groupedWorks = archiveWorks.filter((work) => work.filter === filter)
+          const headingId = `archive-group-${groupIndex + 1}`
 
-          <div className="archive-list" aria-label={`${activeFilter}作品`}>
-            {groupedWorks.map((work, index) => (
-              <button
-                key={work.id}
-                type="button"
-                className={`archive-item archive-item--${index < 3 ? 'lead' : 'row'} ${
-                  work.cover ? '' : 'archive-item--text'
-                }`}
-                onClick={() => onOpen(work)}
-              >
-                <span className="archive-media">
-                  {work.cover ? (
-                    <img src={work.cover} alt="" loading="lazy" />
-                  ) : (
-                    <span className="type-cover">
-                      <span>{work.section === 'wechat' ? 'WECHAT' : 'DOCUMENT'}</span>
-                      <b>{String(index + 1).padStart(2, '0')}</b>
+          return (
+            <section
+              key={filter}
+              className={`archive-group archive-group--${groupIndex + 1}`}
+              aria-labelledby={headingId}
+            >
+              <div className="archive-group-heading">
+                <div>
+                  <span className="utility-line">GROUP / {String(groupIndex + 1).padStart(2, '0')}</span>
+                  <h3 id={headingId}>{filter}</h3>
+                </div>
+                <span>{groupedWorks.length} 项</span>
+              </div>
+
+              <div className="archive-list" aria-label={`${filter}作品`}>
+                {groupedWorks.map((work, index) => (
+                  <button
+                    key={work.id}
+                    type="button"
+                    className={`archive-item archive-item--${index < 3 ? 'lead' : 'row'} ${
+                      work.cover ? '' : 'archive-item--text'
+                    }`}
+                    onClick={() => onOpen(work)}
+                  >
+                    <span className="archive-media">
+                      {work.cover ? (
+                        <img src={work.cover} alt="" loading="lazy" />
+                      ) : (
+                        <span className="type-cover">
+                          <span>{work.section === 'wechat' ? 'WECHAT' : 'DOCUMENT'}</span>
+                          <b>{String(index + 1).padStart(2, '0')}</b>
+                        </span>
+                      )}
                     </span>
-                  )}
-                </span>
-                <span className="archive-copy">
-                  <span className="utility-line">
-                    {work.filter}
-                    {work.platform ? ` · ${work.platform}` : ''}
-                  </span>
-                  <strong>{work.title}</strong>
-                  {index < 3 && <span className="archive-summary">{work.summary}</span>}
-                  <ArrowRight className="archive-arrow" aria-hidden="true" />
-                </span>
-                <span className="folio-number">{String(index + 1).padStart(2, '0')}</span>
-              </button>
-            ))}
-          </div>
-        </section>
+                    <span className="archive-copy">
+                      <span className="utility-line">
+                        {work.filter}
+                        {work.platform ? ` · ${work.platform}` : ''}
+                      </span>
+                      <strong>{work.title}</strong>
+                      {index < 3 && <span className="archive-summary">{work.summary}</span>}
+                      <ArrowRight className="archive-arrow" aria-hidden="true" />
+                    </span>
+                    <span className="folio-number">{String(index + 1).padStart(2, '0')}</span>
+                  </button>
+                ))}
+              </div>
+            </section>
+          )
+        })}
       </div>
     </section>
   )

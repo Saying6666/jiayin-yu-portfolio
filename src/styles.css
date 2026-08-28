@@ -3727,19 +3727,6 @@ iframe:focus-visible {
   height: 0.62rem;
 }
 
-.filter-rail button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.42rem;
-}
-
-.filter-rail button > span {
-  color: var(--signal-blue);
-  font-family: var(--utility);
-  font-size: 0.68rem;
-  font-weight: 700;
-}
-
 .section-heading-row h2,
 .media-band-heading h2,
 .wechat-intro h2,
