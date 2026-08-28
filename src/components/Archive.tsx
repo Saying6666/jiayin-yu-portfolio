@@ -1,108 +1,86 @@
-import { useMemo, useState } from 'react'
-import { ArrowRight, Plus } from 'lucide-react'
-import { allWorks, filters } from '../data/works'
+import { ArrowRight } from 'lucide-react'
+import { allWorks } from '../data/works'
 import type { FilterKey, Work } from '../types'
 
-type ArchiveFilter = Exclude<FilterKey, '全部'>
+type ArchiveFilter = Extract<FilterKey, '纪实影像' | '评论写作' | '深度报道' | '编辑排版'>
 
 type ArchiveProps = {
   onOpen: (work: Work) => void
 }
 
+const archiveGroups: ArchiveFilter[] = ['纪实影像', '评论写作', '深度报道', '编辑排版']
 const archiveWorks = allWorks.filter((work) => work.section !== 'lab' || work.id === 'book-layout')
 
 export function Archive({ onOpen }: ArchiveProps) {
-  const [activeFilter, setActiveFilter] = useState<ArchiveFilter>('纪实影像')
-  const [expanded, setExpanded] = useState(false)
-
-  const filtered = useMemo(() => archiveWorks.filter((work) => work.filter === activeFilter), [activeFilter])
-
-  const visible = expanded ? filtered : filtered.slice(0, 10)
-
-  const chooseFilter = (filter: ArchiveFilter) => {
-    setActiveFilter(filter)
-    setExpanded(false)
-  }
-
   return (
-    <section id="archive" className="archive section-shell reveal">
+    <section id="archive" className="archive archive--stack section-shell reveal">
       <div className="archive-title-row">
         <div>
           <h2>全部作品</h2>
           <span className="lime-stroke" aria-hidden="true" />
           <p>按媒介浏览，也按议题抵达。</p>
         </div>
-        <span className="archive-count" aria-label={`共 ${filtered.length} 项作品`}>
-          {String(filtered.length).padStart(2, '0')} / ARCHIVE
+        <span className="archive-count" aria-label={`共 ${archiveWorks.length} 项作品`}>
+          {String(archiveWorks.length).padStart(2, '0')} / ARCHIVE
         </span>
       </div>
 
-      <div className="filter-rail" role="tablist" aria-label="作品分类">
-        {filters.map((filter) => (
-          <button
-            key={filter}
-            type="button"
-            role="tab"
-            aria-selected={activeFilter === filter}
-            aria-controls="archive-group-panel"
-            className={activeFilter === filter ? 'is-active' : ''}
-            onClick={() => chooseFilter(filter)}
-          >
-            {filter}
-          </button>
-        ))}
-      </div>
+      <div className="archive-stack">
+        {archiveGroups.map((filter, groupIndex) => {
+          const groupedWorks = archiveWorks.filter((work) => work.filter === filter)
+          const headingId = `archive-group-${groupIndex + 1}`
 
-      <div className="archive-group-heading" aria-live="polite">
-        <div>
-          <span className="utility-line">
-            GROUP / {String(filters.indexOf(activeFilter) + 1).padStart(2, '0')}
-          </span>
-          <h3>{activeFilter}</h3>
-        </div>
-        <span>{filtered.length} 项</span>
-      </div>
+          return (
+            <section
+              key={filter}
+              className={`archive-group archive-group--${groupIndex + 1}`}
+              aria-labelledby={headingId}
+            >
+              <div className="archive-group-heading">
+                <div>
+                  <span className="utility-line">GROUP / {String(groupIndex + 1).padStart(2, '0')}</span>
+                  <h3 id={headingId}>{filter}</h3>
+                </div>
+                <span>{groupedWorks.length} 项</span>
+              </div>
 
-      <div id="archive-group-panel" className="archive-list" role="tabpanel" aria-label={`${activeFilter}作品`}>
-        {visible.map((work, index) => (
-          <button
-            key={work.id}
-            type="button"
-            className={`archive-item archive-item--${index < 3 ? 'lead' : 'row'} ${
-              work.cover ? '' : 'archive-item--text'
-            }`}
-            onClick={() => onOpen(work)}
-          >
-            <span className="archive-media">
-              {work.cover ? (
-                <img src={work.cover} alt="" loading="lazy" />
-              ) : (
-                <span className="type-cover">
-                  <span>{work.section === 'wechat' ? 'WECHAT' : 'DOCUMENT'}</span>
-                  <b>{String(index + 1).padStart(2, '0')}</b>
-                </span>
-              )}
-            </span>
-            <span className="archive-copy">
-              <span className="utility-line">
-                {work.filter}
-                {work.platform ? ` · ${work.platform}` : ''}
-              </span>
-              <strong>{work.title}</strong>
-              {index < 3 && <span className="archive-summary">{work.summary}</span>}
-              <ArrowRight className="archive-arrow" aria-hidden="true" />
-            </span>
-            <span className="folio-number">{String(index + 1).padStart(2, '0')}</span>
-          </button>
-        ))}
+              <div className="archive-list" aria-label={`${filter}作品`}>
+                {groupedWorks.map((work, index) => (
+                  <button
+                    key={work.id}
+                    type="button"
+                    className={`archive-item archive-item--${index < 3 ? 'lead' : 'row'} ${
+                      work.cover ? '' : 'archive-item--text'
+                    }`}
+                    onClick={() => onOpen(work)}
+                  >
+                    <span className="archive-media">
+                      {work.cover ? (
+                        <img src={work.cover} alt="" loading="lazy" />
+                      ) : (
+                        <span className="type-cover">
+                          <span>{work.section === 'wechat' ? 'WECHAT' : 'DOCUMENT'}</span>
+                          <b>{String(index + 1).padStart(2, '0')}</b>
+                        </span>
+                      )}
+                    </span>
+                    <span className="archive-copy">
+                      <span className="utility-line">
+                        {work.filter}
+                        {work.platform ? ` · ${work.platform}` : ''}
+                      </span>
+                      <strong>{work.title}</strong>
+                      {index < 3 && <span className="archive-summary">{work.summary}</span>}
+                      <ArrowRight className="archive-arrow" aria-hidden="true" />
+                    </span>
+                    <span className="folio-number">{String(index + 1).padStart(2, '0')}</span>
+                  </button>
+                ))}
+              </div>
+            </section>
+          )
+        })}
       </div>
-
-      {filtered.length > visible.length && (
-        <button className="load-more" type="button" onClick={() => setExpanded(true)}>
-          <Plus aria-hidden="true" />
-          展开其余 {filtered.length - visible.length} 项
-        </button>
-      )}
     </section>
   )
 }

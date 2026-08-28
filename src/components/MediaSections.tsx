@@ -8,6 +8,7 @@ type MediaSectionsProps = {
 
 export function MediaSections({ onOpen }: MediaSectionsProps) {
   const lab = works.filter((work) => work.section === 'lab' && work.id !== 'book-layout')
+  const visual = works.filter((work) => work.section === 'visual')
 
   return (
     <>
@@ -32,6 +33,38 @@ export function MediaSections({ onOpen }: MediaSectionsProps) {
                 <small>{work.platform}</small>
               </span>
               <ArrowRight aria-hidden="true" />
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section id="new-media" className="new-media-section section-shell reveal">
+        <div className="section-heading-row new-media-heading">
+          <div>
+            <span className="utility-line">GROUP / 06</span>
+            <h2>新媒体设计</h2>
+            <span className="heading-rule" aria-hidden="true" />
+          </div>
+          <span className="new-media-count">{String(visual.length).padStart(2, '0')} / VISUAL</span>
+        </div>
+
+        <div className="new-media-grid" role="list">
+          {visual.map((work, index) => (
+            <button
+              key={work.id}
+              type="button"
+              className={`new-media-card new-media-card--${index + 1}`}
+              onClick={() => onOpen(work)}
+            >
+              <span className="new-media-media">
+                {work.cover ? <img src={work.cover} alt="" loading="lazy" /> : <span className="type-cover" />}
+                <span className="new-media-index">{String(index + 1).padStart(2, '0')}</span>
+              </span>
+              <span className="new-media-copy">
+                <span className="utility-line">{work.platform ?? 'VISUAL SYSTEM'}</span>
+                <strong>{work.title}</strong>
+                <ArrowRight aria-hidden="true" />
+              </span>
             </button>
           ))}
         </div>
