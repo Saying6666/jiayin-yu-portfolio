@@ -9,14 +9,53 @@ const filmFrames = [
   { index: '05', src: '/assets/covers/rural-mural.jpg', alt: '乡村墙体彩绘纪实画面' },
 ]
 
-function FocusMark() {
+function OrbitSignal() {
   return (
-    <svg className="cover-focus-mark" viewBox="0 0 88 88" role="img" aria-label="从隐藏到显现的视线标识">
-      <circle className="cover-focus-orbit cover-focus-orbit--outer" cx="44" cy="44" r="34" />
-      <circle className="cover-focus-orbit cover-focus-orbit--inner" cx="44" cy="44" r="22" />
-      <path className="cover-focus-glow" d="M10 57C24 72 38 65 44 44S65 12 78 24" />
-      <path className="cover-focus-line" d="M10 57C24 72 38 65 44 44S65 12 78 24" />
-      <circle className="cover-focus-core" cx="44" cy="44" r="7" />
+    <svg
+      className="cover-orbit-signal cover-enter cover-enter--1"
+      viewBox="0 0 640 460"
+      role="img"
+      aria-label="从聚焦圆环延伸到影像声波的动态视线轨迹"
+    >
+      <defs>
+        <linearGradient id="cover-orbit-gradient" x1="104" y1="142" x2="610" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#bbfc00" />
+          <stop offset="0.52" stopColor="#8fffc5" />
+          <stop offset="1" stopColor="#27dbe7" />
+        </linearGradient>
+        <filter id="cover-orbit-glow" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="5" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <path
+        className="cover-orbit-route cover-orbit-route--upper"
+        d="M107 142C143 181 196 195 251 167C353 102 469 43 610 0"
+      />
+      <path
+        className="cover-orbit-route cover-orbit-route--lower"
+        d="M121 430C126 326 166 229 251 167"
+      />
+      <path
+        className="cover-orbit-sweep"
+        d="M107 142C143 181 196 195 251 167C353 102 469 43 610 0"
+      />
+
+      <g className="cover-orbit-radar">
+        <circle className="cover-orbit-ring cover-orbit-ring--outer" cx="105" cy="99" r="45" />
+        <circle className="cover-orbit-ring cover-orbit-ring--inner" cx="105" cy="99" r="27" />
+        <circle className="cover-orbit-halo" cx="105" cy="99" r="17" />
+        <path className="cover-orbit-hook" d="M61 114C65 133 83 144 107 142" />
+        <circle className="cover-orbit-core" cx="105" cy="99" r="9" />
+      </g>
+
+      <circle className="cover-orbit-node cover-orbit-node--one" cx="107" cy="142" r="7" />
+      <circle className="cover-orbit-node cover-orbit-node--two" cx="251" cy="167" r="7" />
+      <circle className="cover-orbit-node cover-orbit-node--three" cx="121" cy="430" r="7" />
     </svg>
   )
 }
@@ -133,10 +172,10 @@ export function VisibilitySignal() {
         <rect width="100%" height="100%" filter="url(#cover-grain-filter)" />
       </svg>
       <span className="cover-left-rail" aria-hidden="true" />
+      <OrbitSignal />
 
       <div className="cover-frame">
         <div className="cover-topline cover-enter cover-enter--1">
-          <FocusMark />
           <span className="cover-portfolio-label">· PORTFOLIO · 2026</span>
         </div>
 
