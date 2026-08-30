@@ -1,15 +1,22 @@
 import { useEffect, useRef } from 'react'
-import { ArrowDown, ArrowRight } from 'lucide-react'
+import { ArrowDown } from 'lucide-react'
 
-const filmFrames = ['01', '02', '03', '04', '05', '06', '07', '08']
+const filmFrames = [
+  { index: '01', src: '/assets/covers/orange-revival-alt2.jpg', alt: '奉节脐橙纪实影像画面' },
+  { index: '02', src: '/assets/covers/basket-mountain.jpg', alt: '背篓里的山与城纪实影像画面' },
+  { index: '03', src: '/assets/covers/bike-return-interview.jpg', alt: '共享单车调查采访画面' },
+  { index: '04', src: '/assets/covers/acne-film-frame.jpg', alt: '让痘痘飞创意影像画面' },
+  { index: '05', src: '/assets/covers/rural-mural.jpg', alt: '乡村墙体彩绘纪实画面' },
+]
 
 function FocusMark() {
   return (
-    <svg className="cover-focus-mark" viewBox="0 0 72 72" role="img" aria-label="从隐藏到显现的视线标识">
-      <circle className="cover-focus-orbit" cx="36" cy="36" r="27" />
-      <path className="cover-focus-glow" d="M5 51C17 61 29 56 36 36S53 10 67 19" />
-      <path className="cover-focus-line" d="M5 51C17 61 29 56 36 36S53 10 67 19" />
-      <circle className="cover-focus-core" cx="36" cy="36" r="5" />
+    <svg className="cover-focus-mark" viewBox="0 0 88 88" role="img" aria-label="从隐藏到显现的视线标识">
+      <circle className="cover-focus-orbit cover-focus-orbit--outer" cx="44" cy="44" r="34" />
+      <circle className="cover-focus-orbit cover-focus-orbit--inner" cx="44" cy="44" r="22" />
+      <path className="cover-focus-glow" d="M10 57C24 72 38 65 44 44S65 12 78 24" />
+      <path className="cover-focus-line" d="M10 57C24 72 38 65 44 44S65 12 78 24" />
+      <circle className="cover-focus-core" cx="44" cy="44" r="7" />
     </svg>
   )
 }
@@ -40,30 +47,52 @@ function SoundWave() {
 
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
       context.clearRect(0, 0, rect.width, rect.height)
+      context.lineCap = 'round'
 
-      const waves = [
-        { alpha: 0.9, amplitude: 0.27, phase: 0, speed: 0.00022, width: 1.8 },
-        { alpha: 0.5, amplitude: 0.2, phase: 1.75, speed: -0.00016, width: 1.15 },
-        { alpha: 0.3, amplitude: 0.32, phase: 3.2, speed: 0.0001, width: 0.8 },
-      ]
+      const baseline = rect.height / 2
+      const meterWidth = rect.width * 0.36
+      const barGap = Math.max(5, rect.width / 180)
 
-      waves.forEach((wave, index) => {
+      for (let x = 0; x < meterWidth; x += barGap) {
+        const progress = x / meterWidth
+        const envelope =
+          Math.exp(-Math.pow((progress - 0.24) / 0.13, 2)) * 0.62 +
+          Math.exp(-Math.pow((progress - 0.66) / 0.14, 2)) * 0.92 +
+          0.08
+        const pulse = 0.7 + Math.sin(progress * 23 + time * 0.0011) * 0.16
+        const amplitude = rect.height * 0.42 * envelope * pulse
+        const cyanMix = progress
         context.beginPath()
-        for (let x = 0; x <= rect.width; x += 2) {
-          const progress = x / rect.width
-          const envelope = 0.62 + Math.sin(progress * Math.PI) * 0.38
-          const primary = Math.sin(progress * Math.PI * 2.15 + wave.phase + time * wave.speed)
-          const harmonic = Math.sin(progress * Math.PI * 4.3 - wave.phase * 0.45 + time * wave.speed * 0.6)
-          const y = rect.height / 2 + (primary + harmonic * 0.16) * rect.height * wave.amplitude * envelope
-          if (x === 0) context.moveTo(x, y)
+        context.moveTo(x, baseline - amplitude)
+        context.lineTo(x, baseline + amplitude)
+        context.strokeStyle = `rgba(${Math.round(188 - cyanMix * 95)}, ${Math.round(252 - cyanMix * 15)}, ${Math.round(cyanMix * 205)}, 0.92)`
+        context.lineWidth = progress > 0.48 && progress < 0.74 ? 2.25 : 1.45
+        context.shadowColor = 'rgba(187, 252, 0, 0.28)'
+        context.shadowBlur = 7
+        context.stroke()
+      }
+
+      const waveStart = meterWidth * 0.9
+      const waveWidth = rect.width - waveStart
+      for (let line = 0; line < 15; line += 1) {
+        const offset = (line - 7) * 2.5
+        context.beginPath()
+        for (let x = waveStart; x <= rect.width; x += 2) {
+          const progress = (x - waveStart) / waveWidth
+          const envelope = Math.sin(progress * Math.PI) * 0.86 + 0.12
+          const primary = Math.sin(progress * Math.PI * 4.25 + time * 0.00032 + line * 0.11)
+          const secondary = Math.sin(progress * Math.PI * 8.5 - time * 0.00018 + line * 0.07) * 0.12
+          const y = baseline + (primary + secondary) * rect.height * 0.28 * envelope + offset
+          if (x === waveStart) context.moveTo(x, y)
           else context.lineTo(x, y)
         }
-        context.strokeStyle = `rgba(187, 252, 0, ${wave.alpha})`
-        context.lineWidth = wave.width
-        context.shadowColor = index === 0 ? 'rgba(187, 252, 0, 0.2)' : 'transparent'
-        context.shadowBlur = index === 0 ? 8 : 0
+        const mix = line / 14
+        context.strokeStyle = `rgba(${Math.round(187 - mix * 160)}, ${Math.round(252 - mix * 52)}, ${Math.round(20 + mix * 225)}, ${0.78 - Math.abs(line - 7) * 0.045})`
+        context.lineWidth = line === 7 ? 1.7 : 0.85
+        context.shadowColor = line === 7 ? 'rgba(187, 252, 0, 0.32)' : 'transparent'
+        context.shadowBlur = line === 7 ? 8 : 0
         context.stroke()
-      })
+      }
 
       if (!reduceMotion) animationFrame = window.requestAnimationFrame(draw)
     }
@@ -84,10 +113,10 @@ function SoundWave() {
 function FilmRun() {
   return (
     <div className="cover-film-run" aria-hidden="true">
-      {filmFrames.map((frame, index) => (
-        <span key={frame} className={`cover-film-frame cover-film-frame--${index + 1}`}>
-          <i />
-          <b>{frame}</b>
+      {filmFrames.map((frame) => (
+        <span key={frame.index} className="cover-film-frame">
+          <img src={frame.src} alt={frame.alt} />
+          <b>{frame.index}</b>
         </span>
       ))}
     </div>
@@ -96,7 +125,7 @@ function FilmRun() {
 
 export function VisibilitySignal() {
   return (
-    <section id="visibility" className="cover-hero" aria-labelledby="cover-title">
+    <section id="visibility" className="cover-hero cover-hero--reference" aria-labelledby="cover-title">
       <svg className="cover-grain" aria-hidden="true">
         <filter id="cover-grain-filter">
           <feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="3" seed="12" stitchTiles="stitch" />
@@ -104,55 +133,43 @@ export function VisibilitySignal() {
         <rect width="100%" height="100%" filter="url(#cover-grain-filter)" />
       </svg>
       <span className="cover-left-rail" aria-hidden="true" />
-      <span className="cover-editorial-quote" aria-hidden="true">“</span>
 
       <div className="cover-frame">
-        <div className="cover-meta cover-enter cover-enter--1">
+        <div className="cover-topline cover-enter cover-enter--1">
           <FocusMark />
-          <span>PORTFOLIO · 2026</span>
+          <span className="cover-portfolio-label">· PORTFOLIO · 2026</span>
         </div>
 
         <div className="cover-main">
-          <div className="cover-discipline cover-enter cover-enter--2">
-            <i aria-hidden="true" />
-            <span>新闻传播学 · 作品集</span>
-          </div>
-
-          <h1 id="cover-title" className="cover-title">
-            <span className="cover-enter cover-enter--3">让内容</span>
-            <span className="cover-title-accent cover-enter cover-enter--4">被看见</span>
+          <h1 id="cover-title" className="cover-title cover-enter cover-enter--3">
+            <span>让内容</span>
+            <span>被看见。</span>
           </h1>
-
           <p className="cover-subtitle cover-enter cover-enter--5">
             好的内容不只是说了什么，还包括它如何被看到和记住
           </p>
         </div>
 
-        <div className="cover-motion cover-enter cover-enter--6">
-          <div className="cover-wave" aria-label="缓慢流动的三层声波">
-            <SoundWave />
-            <span>SIGNAL / 03</span>
-          </div>
-          <div className="cover-film" aria-label="缓慢横向滚动的电影胶片">
+        <div className="cover-cinema cover-enter cover-enter--6" aria-label="作品影像与动态声波">
+          <div className="cover-film" aria-hidden="true">
             <div className="cover-film-track">
               <FilmRun />
               <FilmRun />
             </div>
           </div>
+          <SoundWave />
         </div>
 
         <div className="cover-footer cover-enter cover-enter--7">
-          <a className="cover-button" href="#archive">
-            浏览作品
-            <ArrowRight aria-hidden="true" />
-          </a>
-          <a className="cover-scroll" href="#archive">
-            <span>
+          <div className="cover-actions">
+            <a className="cover-button" href="#archive">浏览作品</a>
+            <a className="cover-scroll" href="#archive">
+              向下滚动
               <ArrowDown aria-hidden="true" />
-            </span>
-            向下滚动，探索更多作品
-          </a>
-          <span className="cover-signature">JIA YINYU</span>
+            </a>
+          </div>
+          <span className="cover-footer-rule" aria-hidden="true" />
+          <span className="cover-signature">贾银玉</span>
         </div>
       </div>
     </section>

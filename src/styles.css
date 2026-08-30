@@ -4846,3 +4846,398 @@ iframe:focus-visible {
     transform: translateX(-3%);
   }
 }
+
+/* Reference-layout pass: centered editorial title, image film strip, restrained footer. */
+.cover-hero--reference {
+  min-height: calc(100svh - 76px);
+  background:
+    radial-gradient(circle at 52% 42%, rgba(22, 34, 36, 0.34), transparent 38%),
+    #090b0c;
+}
+
+.cover-hero--reference .cover-left-rail {
+  display: none;
+}
+
+.cover-hero--reference .cover-frame {
+  width: 100%;
+  max-width: none;
+  min-height: inherit;
+  padding: clamp(1.7rem, 3.7vw, 3.75rem) clamp(2rem, 4.7vw, 4.75rem) clamp(1.45rem, 3vw, 3rem);
+  grid-template-rows: auto minmax(11rem, 1fr) auto auto;
+  gap: 0;
+}
+
+.cover-hero--reference .cover-grain {
+  opacity: 0.1;
+}
+
+.cover-topline {
+  display: grid;
+  align-items: start;
+  grid-template-columns: 1fr auto;
+}
+
+.cover-hero--reference .cover-focus-mark {
+  width: clamp(5rem, 7vw, 7rem);
+  color: #bbfc00;
+}
+
+.cover-hero--reference .cover-focus-orbit--outer {
+  stroke: #f4f4f1;
+  stroke-width: 1.2;
+  stroke-dasharray: 2.6 4.2;
+  opacity: 0.94;
+}
+
+.cover-hero--reference .cover-focus-orbit--inner {
+  stroke: rgba(244, 244, 241, 0.82);
+  stroke-width: 1;
+  stroke-dasharray: 2.2 3.8;
+  opacity: 0.9;
+}
+
+.cover-hero--reference .cover-focus-line {
+  stroke: #8fffc5;
+  stroke-width: 1.35;
+}
+
+.cover-hero--reference .cover-focus-glow {
+  stroke: #bbfc00;
+  stroke-width: 6;
+  opacity: 0.13;
+}
+
+.cover-portfolio-label {
+  padding-top: 0.45rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: var(--utility);
+  font-size: clamp(0.75rem, 1.18vw, 1.12rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.cover-hero--reference .cover-main {
+  align-self: center;
+  width: 100%;
+  max-width: none;
+  padding: clamp(0.75rem, 2vw, 1.8rem) 0 clamp(1.3rem, 2.8vw, 2.8rem);
+  text-align: center;
+  transform: translateY(-1.55rem);
+}
+
+.cover-hero--reference .cover-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.26em;
+  color: #ffffff;
+  font-size: clamp(4.5rem, 6.3vw, 7.1rem);
+  line-height: 0.98;
+  letter-spacing: 0.025em;
+}
+
+.cover-hero--reference .cover-title > span {
+  width: auto;
+  color: inherit;
+  margin: 0;
+}
+
+.cover-hero--reference .cover-subtitle {
+  max-width: none;
+  margin: clamp(1.3rem, 2.2vw, 2.15rem) auto 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(1.02rem, 1.5vw, 1.4rem);
+  font-weight: 350;
+  line-height: 1.55;
+  letter-spacing: 0.025em;
+}
+
+.cover-cinema {
+  position: relative;
+  height: clamp(10.5rem, 17vw, 13.8rem);
+  margin-inline: calc(clamp(2rem, 4.7vw, 4.75rem) * -1);
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #080b0c;
+}
+
+.cover-cinema::before,
+.cover-cinema::after {
+  position: absolute;
+  z-index: 5;
+  right: 0;
+  left: 0;
+  height: 20px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 7px,
+      rgba(255, 255, 255, 0.2) 7px 18px,
+      transparent 18px 26px
+    ),
+    rgba(5, 7, 8, 0.88);
+  content: "";
+  opacity: 0.64;
+  pointer-events: none;
+}
+
+.cover-cinema::before {
+  top: 0;
+  mask: linear-gradient(#000 0 42%, transparent 42% 64%, #000 64%);
+}
+
+.cover-cinema::after {
+  bottom: 0;
+  mask: linear-gradient(#000 0 36%, transparent 36% 58%, #000 58%);
+}
+
+.cover-hero--reference .cover-film {
+  height: 100%;
+  border: 0;
+  background: #0a1012;
+}
+
+.cover-hero--reference .cover-film::before,
+.cover-hero--reference .cover-film::after {
+  display: none;
+}
+
+.cover-hero--reference .cover-film-track {
+  height: 100%;
+  animation-duration: 24s;
+}
+
+.cover-hero--reference .cover-film-run {
+  display: grid;
+  height: 100%;
+  padding: 1.65rem 0;
+  grid-template-columns: repeat(5, clamp(17rem, 20vw, 22rem));
+}
+
+.cover-hero--reference .cover-film-frame {
+  position: relative;
+  border: 0;
+  border-right: 7px solid #080b0c;
+  background: #0b181b;
+}
+
+.cover-hero--reference .cover-film-frame::after {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 225, 255, 0.16), rgba(187, 252, 0, 0.06)),
+    linear-gradient(180deg, rgba(3, 8, 10, 0.12), rgba(2, 6, 7, 0.34));
+  content: "";
+  mix-blend-mode: color;
+  pointer-events: none;
+}
+
+.cover-hero--reference .cover-film-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.72;
+  filter: saturate(0.48) contrast(1.08) brightness(0.62) hue-rotate(118deg) blur(0.85px);
+  transform: scale(1.025);
+}
+
+.cover-hero--reference .cover-film-frame b {
+  z-index: 2;
+  right: 0.5rem;
+  bottom: 1.55rem;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.cover-hero--reference .cover-wave-canvas {
+  position: absolute;
+  z-index: 4;
+  inset: 20px 0;
+  width: 100%;
+  height: calc(100% - 40px);
+  pointer-events: none;
+}
+
+.cover-hero--reference .cover-footer {
+  display: grid;
+  align-items: center;
+  gap: clamp(1.7rem, 4vw, 4.2rem);
+  padding-top: clamp(1.6rem, 3vw, 2.8rem);
+  grid-template-columns: auto minmax(4rem, 1fr) auto;
+}
+
+.cover-actions {
+  display: grid;
+  width: clamp(19rem, 29vw, 24rem);
+  min-height: 3.25rem;
+  overflow: hidden;
+  border: 1px solid #09bfe6;
+  border-radius: 5px;
+  grid-template-columns: 1fr 1.06fr;
+}
+
+.cover-hero--reference .cover-button,
+.cover-hero--reference .cover-scroll {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-height: 100%;
+  padding: 0.72rem 1rem;
+  color: #ffffff;
+  font-size: clamp(0.9rem, 1.18vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.cover-hero--reference .cover-button {
+  background: #0bb9de;
+}
+
+.cover-hero--reference .cover-button:hover {
+  background: #0646dc;
+  transform: none;
+}
+
+.cover-hero--reference .cover-scroll {
+  gap: 0.65rem;
+  border-left: 1px solid #09bfe6;
+  background: rgba(3, 10, 12, 0.52);
+}
+
+.cover-hero--reference .cover-scroll svg {
+  width: 1.05rem;
+}
+
+.cover-footer-rule {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.cover-hero--reference .cover-signature {
+  color: rgba(255, 255, 255, 0.76);
+  font-family: "Songti SC", STSong, "Noto Serif SC", "Source Han Serif SC", serif;
+  font-size: clamp(1.2rem, 1.7vw, 1.55rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+@media (max-height: 760px) and (min-width: 701px) {
+  .cover-hero--reference .cover-frame {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .cover-hero--reference .cover-focus-mark {
+    width: 4.15rem;
+  }
+
+  .cover-hero--reference .cover-main {
+    padding-block: 0.25rem 1rem;
+  }
+
+  .cover-hero--reference .cover-title {
+    font-size: clamp(3.9rem, 6vw, 5.7rem);
+  }
+
+  .cover-hero--reference .cover-subtitle {
+    margin-top: 0.9rem;
+  }
+
+  .cover-cinema {
+    height: 10.3rem;
+  }
+
+  .cover-hero--reference .cover-footer {
+    padding-top: 1.15rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .cover-hero--reference {
+    min-height: calc(100svh - 68px);
+  }
+
+  .cover-hero--reference .cover-frame {
+    padding: 1.2rem 1.25rem 1.4rem;
+    grid-template-rows: auto minmax(14rem, 1fr) auto auto;
+  }
+
+  .cover-hero--reference .cover-focus-mark {
+    width: 3.8rem;
+  }
+
+  .cover-portfolio-label {
+    padding-top: 0.32rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.065em;
+  }
+
+  .cover-hero--reference .cover-main {
+    padding: 1rem 0 1.35rem;
+    transform: none;
+  }
+
+  .cover-hero--reference .cover-title {
+    display: grid;
+    gap: 0.08em;
+    font-size: clamp(3.1rem, 15.5vw, 4.2rem);
+    line-height: 0.98;
+  }
+
+  .cover-hero--reference .cover-subtitle {
+    max-width: 21rem;
+    margin-top: 1.2rem;
+    font-size: 0.84rem;
+    line-height: 1.72;
+  }
+
+  .cover-cinema {
+    height: 11rem;
+    margin-inline: -1.25rem;
+  }
+
+  .cover-hero--reference .cover-film-run {
+    grid-template-columns: repeat(5, 11.4rem);
+  }
+
+  .cover-hero--reference .cover-footer {
+    gap: 0.85rem;
+    padding-top: 1.25rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .cover-actions {
+    width: 100%;
+    min-height: 3.15rem;
+  }
+
+  .cover-hero--reference .cover-button,
+  .cover-hero--reference .cover-scroll {
+    padding-inline: 0.65rem;
+    font-size: 0.82rem;
+  }
+
+  .cover-hero--reference .cover-scroll {
+    justify-self: stretch;
+  }
+
+  .cover-footer-rule {
+    display: none;
+  }
+
+  .cover-hero--reference .cover-signature {
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cover-hero--reference .cover-film-track {
+    animation: none;
+    transform: translateX(-5%);
+  }
+}
