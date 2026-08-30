@@ -1,51 +1,43 @@
-import { ArrowUpRight } from 'lucide-react'
+const contactItems = [
+  { label: 'NAME', value: '贾银玉' },
+  { label: 'SCHOOL', value: '重庆大学' },
+  { label: 'WECHAT', value: 'jyy2715750' },
+  {
+    label: 'EMAIL',
+    value: 'jiayinyu_cqu@163.com',
+    href: 'mailto:jiayinyu_cqu@163.com',
+  },
+]
 
 export function AboutFooter() {
   return (
-    <footer id="about" className="site-footer contact-footer">
-      <div className="section-shell footer-grid">
-        <div>
-          <span className="footer-brand">JYY.</span>
-          <h2>让重要的内容，被准确地看见。</h2>
-        </div>
-
-        <div className="footer-contact">
-          <div className="contact-block">
-            <span className="utility-line">CONTACT / 04</span>
-            <dl className="contact-list">
-              <div>
-                <dt>姓名</dt>
-                <dd>贾银玉</dd>
-              </div>
-              <div>
-                <dt>学校</dt>
-                <dd>重庆大学</dd>
-              </div>
-              <div>
-                <dt>电话</dt>
-                <dd><a href="tel:19823434227">19823434227</a></dd>
-              </div>
-              <div>
-                <dt>微信</dt>
-                <dd>jyy2715750</dd>
-              </div>
-              <div>
-                <dt>邮箱</dt>
-                <dd><a href="mailto:jiayinyu_cqu@163.com">jiayinyu_cqu@163.com</a></dd>
-              </div>
-            </dl>
-          </div>
-
-          <a className="footer-action" href="#top">
-            ↑ BACK TO TOP
-            <ArrowUpRight aria-hidden="true" />
-          </a>
-        </div>
+    <footer id="about" className="ending-footer">
+      <div className="ending-visual">
+        <img
+          src="/assets/visuals/contact-hero-reference.jpg"
+          alt="让重要的内容，被准确地看见。镜头与环形线条构成的黑绿色视觉画面"
+        />
       </div>
 
-      <div className="section-shell footer-bottom">
-        <span>贾银玉 · 新闻传播作品集</span>
-        <span>内容更新至 2026</span>
+      <div className="ending-contact-shell section-shell">
+        <h2>CONTACT / 联系</h2>
+
+        <dl className="ending-contact-grid">
+          {contactItems.map((item) => (
+            <div key={item.label}>
+              <dt>{item.label}</dt>
+              <dd>{item.href ? <a href={item.href}>{item.value}</a> : item.value}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <div className="ending-bottom-row">
+          <span>贾银玉·新闻传播学作品集</span>
+          <span>内容更新至2026</span>
+          <a href="#top">
+            回到顶部<span aria-hidden="true">↑</span>
+          </a>
+        </div>
       </div>
     </footer>
   )

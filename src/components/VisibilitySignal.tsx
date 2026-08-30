@@ -164,7 +164,7 @@ function FilmRun() {
 
 export function VisibilitySignal() {
   return (
-    <section id="visibility" className="cover-hero cover-hero--reference" aria-labelledby="cover-title">
+    <section id="top" className="cover-hero cover-hero--reference" aria-labelledby="cover-title">
       <svg className="cover-grain" aria-hidden="true">
         <filter id="cover-grain-filter">
           <feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="3" seed="12" stitchTiles="stitch" />
