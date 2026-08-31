@@ -393,7 +393,7 @@ export const works: Work[] = [
     date: '2021',
     platform: '视觉新闻作品',
     summary: '以字形结构承载新闻信息，将快递动物与在线诉讼两则议题转译为视觉文字。',
-    cover: '/assets/covers/word-news.jpg',
+    cover: '/assets/covers/word-news-realistic.webp',
     mediaSrc: '/assets/documents/word-news.html',
     orientation: 'landscape',
   },

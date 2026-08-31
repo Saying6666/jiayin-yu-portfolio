@@ -5438,83 +5438,205 @@ iframe:focus-visible {
   }
 }
 
-/* Ending page: reproduced from 《结尾部分修改》. */
+/* Ending page: editable type over the supplied photographic reference. */
 .ending-footer {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: #0c0c0e;
+  background: #171815;
   color: #ffffff;
-}
-
-.ending-footer::after {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.3'/%3E%3C/svg%3E");
-  content: "";
-  mix-blend-mode: soft-light;
-  opacity: 0.26;
-  pointer-events: none;
 }
 
 .ending-visual {
   position: relative;
+  container-type: inline-size;
   width: 100%;
+  aspect-ratio: 1106 / 390;
+  isolation: isolate;
   overflow: hidden;
   background: #090b0a;
 }
 
-.ending-visual img {
+.ending-artwork {
+  position: absolute;
+  inset: 0;
+  container-type: inline-size;
+  aspect-ratio: 1106 / 390;
+  pointer-events: none;
+}
+
+.ending-backdrop {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Animate sampled light from the bitmap; the actual lens/body stays still. */
+.ending-light {
+  position: absolute;
+  inset: 0;
+  background: url('/assets/visuals/contact-hero-clean.webp') center / 100% 100% no-repeat;
+  transform-origin: 69.1% 56.8%;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.ending-light--ring {
+  mask-image: radial-gradient(circle at 69.1% 56.8%, transparent 14.5cqw, #000 14.9cqw, #000 15.6cqw, transparent 16cqw);
+  opacity: 0.42;
+  animation: ending-ring-flow 36s linear infinite;
+}
+
+.ending-light--aperture {
+  mask-image: radial-gradient(circle at 69.1% 56.8%, #000 0, #000 3cqw, transparent 8.4cqw);
+  opacity: 0.2;
+  animation: ending-aperture-flow 18s ease-in-out infinite;
+}
+
+.ending-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  mix-blend-mode: screen;
+}
+
+.ending-particle {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 10px;
+  height: 10px;
+  /* A real speck of light from the reference, not a drawn replacement. */
+  background: url('/assets/visuals/contact-hero-reference.jpg') -526px -314px / 1106px 390px no-repeat;
+  filter: sepia(1) saturate(0.8);
+  opacity: 0;
+  animation: ending-particle-drift var(--duration) ease-in-out var(--delay) infinite;
+}
+
+.ending-visual[data-motion='paused'] .ending-light,
+.ending-visual[data-motion='paused'] .ending-particle {
+  animation-play-state: paused;
+}
+
+.ending-statement {
+  position: absolute;
+  z-index: 2;
+  top: 18.7%;
+  left: 6.8%;
+  mix-blend-mode: screen;
+}
+
+.ending-quote {
+  display: block;
+  width: 7.685cqw;
+  height: 7.05cqw;
+  margin-bottom: 0.6cqw;
+  /* Keep the reference's distinctive outlined quotation mark. */
+  background: url('/assets/visuals/contact-hero-reference.jpg') -6.87cqw -6.78cqw / 100cqw auto no-repeat;
+  filter: contrast(1.35);
+  mix-blend-mode: screen;
+}
+
+.ending-statement h2 {
+  margin: 0;
+  font-family: 'Songti SC', 'STSong', 'Noto Serif CJK SC', serif;
+  font-size: 4.72cqw;
+  font-weight: 900;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+  text-shadow: 0 2px 12px rgb(0 0 0 / 24%);
+}
+
+.ending-statement h2 > span {
+  display: block;
+  white-space: nowrap;
+}
+
+.ending-period {
+  color: #c8e590;
 }
 
 .ending-contact-shell {
-  padding-top: clamp(1.8rem, 3.2vw, 3.2rem);
+  width: 100%;
+  padding-inline: 6.5%;
+  padding-top: clamp(1.15rem, 1.8vw, 2rem);
   padding-bottom: clamp(1.25rem, 2.3vw, 2rem);
 }
 
+.ending-contact-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  gap: 1rem;
+}
+
 .ending-contact-shell h2 {
-  margin: 0 0 clamp(1.15rem, 2vw, 1.8rem);
-  color: #d4ff77;
+  margin: 0;
+  color: #dfedaa;
   font-family: var(--display);
   font-size: clamp(1rem, 1.6vw, 1.35rem);
   font-weight: 900;
   letter-spacing: -0.02em;
 }
 
+.ending-motion-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 32px;
+  padding: 0.25rem 0;
+  border: 0;
+  background: transparent;
+  color: #bfc5af;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.ending-motion-toggle svg {
+  width: 13px;
+  height: 13px;
+}
+
+.ending-motion-toggle:hover {
+  color: #dfedaa;
+}
+
+.ending-motion-toggle:disabled {
+  cursor: default;
+}
+
 .ending-contact-grid {
   display: grid;
   margin: 0;
-  border-top: 1px solid #666666;
-  border-bottom: 1px solid #666666;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid #55584e;
+  border-bottom: 1px solid #55584e;
+  grid-template-columns: 0.8fr 1fr 1.1fr 1.5fr;
 }
 
 .ending-contact-grid > div {
   min-width: 0;
-  padding: clamp(1.25rem, 2.4vw, 2.25rem) clamp(1rem, 2.2vw, 2rem);
+  padding: clamp(1.15rem, 1.8vw, 2rem) clamp(0.7rem, 1.5vw, 1.6rem) clamp(1.7rem, 2.8vw, 2.75rem);
 }
 
 .ending-contact-grid > div:first-child {
   padding-left: 0;
 }
 
-.ending-contact-grid > div + div {
-  border-left: 1px solid #666666;
+.ending-contact-grid > div:last-child {
+  padding-right: 0;
 }
 
 .ending-contact-grid dt {
   display: flex;
   flex-direction: column;
   width: fit-content;
-  margin-bottom: clamp(0.8rem, 1.4vw, 1.15rem);
-  color: #bbbbbb;
-  font-family: var(--utility);
-  font-size: clamp(0.62rem, 0.8vw, 0.75rem);
-  letter-spacing: 0.08em;
+  margin-bottom: 0.85rem;
+  color: #c7c9c0;
+  font-family: Arial, 'PingFang SC', sans-serif;
+  font-size: clamp(0.75rem, 1.25vw, 1rem);
+  letter-spacing: 0.02em;
 }
 
 .ending-contact-grid dt::after {
@@ -5529,7 +5651,7 @@ iframe:focus-visible {
   min-width: 0;
   margin: 0;
   color: #ffffff;
-  font-size: clamp(1.05rem, 2vw, 1.75rem);
+  font-size: clamp(1rem, 1.65vw, 1.5rem);
   font-weight: 800;
   line-height: 1.18;
   letter-spacing: -0.035em;
@@ -5537,8 +5659,9 @@ iframe:focus-visible {
 }
 
 .ending-contact-grid > div:last-child dd {
-  font-size: clamp(0.9rem, 1.45vw, 1.2rem);
-  letter-spacing: -0.045em;
+  color: #dfedaa;
+  font-size: clamp(0.9rem, 1.45vw, 1.25rem);
+  letter-spacing: -0.025em;
 }
 
 .ending-contact-grid a {
@@ -5581,6 +5704,32 @@ iframe:focus-visible {
 
 .ending-bottom-row a span {
   font-size: 1rem;
+}
+
+@keyframes ending-ring-flow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ending-aperture-flow {
+  0%, 100% { transform: rotate(-10deg) translate(-0.6%, 0.3%); opacity: 0.14; }
+  50% { transform: rotate(14deg) translate(0.7%, -0.4%); opacity: 0.3; }
+}
+
+@keyframes ending-particle-drift {
+  0%, 100% { transform: translate3d(0, 8px, 0); opacity: 0.04; }
+  35% { opacity: 0.45; }
+  70% { transform: translate3d(var(--drift), -12px, 0); opacity: 0.16; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ending-light,
+  .ending-particle {
+    animation: none;
+  }
+
+  .ending-particles {
+    display: none;
+  }
 }
 
 @media (max-width: 760px) {
@@ -5638,5 +5787,49 @@ iframe:focus-visible {
 
   .ending-bottom-row > :nth-child(2) {
     text-align: left;
+  }
+}
+
+@media (max-width: 600px) {
+  .ending-visual {
+    height: 365px;
+    aspect-ratio: auto;
+  }
+
+  .ending-artwork {
+    inset: 0 auto auto 50%;
+    width: 720px;
+    transform: translateX(-64%);
+  }
+
+  .ending-statement {
+    top: auto;
+    bottom: 26px;
+    left: 6.5%;
+  }
+
+  .ending-quote {
+    width: 42px;
+    height: 39px;
+    margin-bottom: 4px;
+    background-size: 547px auto;
+    background-position: -37.6px -37.1px;
+  }
+
+  .ending-statement h2 {
+    font-size: clamp(26px, 7.5cqw, 36px);
+    line-height: 1.35;
+  }
+
+  .ending-contact-shell {
+    padding-top: 20px;
+  }
+
+  .ending-contact-grid > div {
+    padding-block: 18px;
+  }
+
+  .ending-motion-toggle {
+    min-height: 44px;
   }
 }
