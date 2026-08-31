@@ -299,13 +299,9 @@ export const works: Work[] = [
     section: 'lab',
     kind: 'pdf',
     platform: '二十四节气图文排版',
-    summary: '以二十四节气与七十二候为线索的 25 页图文版式作品。',
+    summary: '以二十四节气与七十二候为线索的 24 页图文版式作品。',
     cover: '/assets/covers/book-layout-user-cover.webp',
-    mediaSrc: '/assets/publications/book-layout.pdf',
-    mediaPages: Array.from(
-      { length: 25 },
-      (_, index) => `/assets/publications/book-layout-pages/page-${String(index + 1).padStart(2, '0')}.jpg`,
-    ),
+    mediaSrc: '/assets/publications/book-layout.pdf?v=753594b4',
     orientation: 'square',
   },
   {
