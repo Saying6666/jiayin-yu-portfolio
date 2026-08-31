@@ -518,6 +518,34 @@
     transform: translateX(-50%);
   }
 
+  /* Scale the visual only: the hero grid and its neighbours keep their slots. */
+  .cover-actions {
+    overflow: visible;
+    transform: scale(0.7);
+    transform-origin: left center;
+  }
+
+  .cover-actions > a {
+    position: relative;
+  }
+
+  .cover-actions > .cover-button {
+    border-radius: 4px 0 0 4px;
+  }
+
+  .cover-actions > .cover-scroll {
+    border-radius: 0 4px 4px 0;
+  }
+
+  .cover-actions > a::after {
+    position: absolute;
+    top: 50%;
+    inset-inline: 0;
+    height: calc(44px / 0.7);
+    transform: translateY(-50%);
+    content: '';
+  }
+
   /* Large, uncropped frames distinguish documentary work from writing. */
   .archive-group--1 .archive-item:nth-child(n) {
     grid-template-columns: minmax(0, 1fr) 24px;
@@ -558,6 +586,106 @@
     bottom: 14px;
   }
 
+  /* Reporting uses wide image-led stories, with the folio in the caption. */
+  .archive-group--3 .archive-item:nth-child(n) {
+    grid-template-columns: minmax(0, 1fr) 28px;
+    grid-template-rows: auto auto;
+  }
+
+  .archive-group--3 .archive-item:nth-child(n) .archive-media {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    aspect-ratio: 16 / 9;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .archive-group--3 .archive-item[data-work-id='recyclers'] .archive-media {
+    aspect-ratio: 1586 / 992;
+  }
+
+  .archive-group--3 .archive-item[data-work-id='rural-mural'] .archive-media {
+    aspect-ratio: 1828 / 804;
+  }
+
+  .archive-group--3 .archive-item:nth-child(n) .archive-media img,
+  .archive-group--4 .archive-item:nth-child(n) .archive-media img {
+    object-fit: contain;
+    transform: none;
+  }
+
+  .archive-group--3 .archive-item:nth-child(n) .archive-copy {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 12px 36px 14px 12px;
+  }
+
+  .archive-group--3 .archive-item:nth-child(n) .archive-copy strong {
+    margin-top: 4px;
+    font-size: clamp(15px, 3.9vw, 20px);
+    line-height: 1.4;
+  }
+
+  .archive-group--3 .archive-item:nth-child(n) .folio-number {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .archive-group--3 .archive-item:nth-child(n) .archive-arrow {
+    bottom: 16px;
+  }
+
+  /* A paired publication shelf preserves the portrait covers in full. */
+  .archive-group--4 .archive-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .archive-group--4 .archive-item:nth-child(n) {
+    grid-column: auto;
+    grid-template-columns: minmax(0, 1fr) 24px;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+  }
+
+  .archive-group--4 .archive-item:nth-child(n) .archive-media {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    padding: clamp(8px, 2vw, 12px);
+    aspect-ratio: 3 / 4;
+    align-self: start;
+  }
+
+  .archive-group--4 .archive-item:nth-child(n) .archive-copy {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 10px 8px 28px;
+  }
+
+  .archive-group--4 .archive-item:nth-child(n) .utility-line {
+    display: none;
+  }
+
+  .archive-group--4 .archive-item:nth-child(n) .archive-copy strong {
+    margin-top: 0;
+    font-size: clamp(14px, 3.4vw, 18px);
+    line-height: 1.5;
+    text-wrap: balance;
+  }
+
+  .archive-group--4 .archive-item:nth-child(n) .folio-number {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .archive-group--4 .archive-item[data-work-id='book-layout'] {
+    grid-column: 1 / -1;
+  }
+
+  .archive-group--4 .archive-item[data-work-id='book-layout'] .archive-media {
+    aspect-ratio: 6 / 5;
+    padding: 12px;
+  }
+
   .ending-visual {
     --ending-mobile-height: clamp(280px, 96vw, 520px);
     --ending-artwork-width: 205vw;
@@ -593,6 +721,15 @@
     transform: none;
   }
 
+  .ending-backdrop {
+    opacity: 0.55;
+  }
+
+  .ending-light {
+    /* Attenuate the lens light without changing its animated opacity/transform. */
+    filter: brightness(0.55);
+  }
+
   .ending-particle:nth-child(even) {
     display: none;
     animation: none;
@@ -614,7 +751,7 @@
   }
 
   .ending-statement h2 {
-    font-size: clamp(20px, 6.2vw, 42px);
+    font-size: clamp(21.6px, 6.696vw, 45.36px);
     line-height: 1.35;
     text-shadow: 0 2px 16px rgb(0 0 0 / 50%);
   }
