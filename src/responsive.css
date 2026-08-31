@@ -1,4 +1,4 @@
-/* Narrow-screen refinements only. Desktop composition and colors are unchanged. */
+/* Scoped refinements: preserve desktop composition except for the requested text panel. */
 @media (max-width: 860px) {
   :root {
     --page-gutter: clamp(16px, 4vw, 28px);
@@ -462,44 +462,99 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (min-width: 769px) {
+  .visual-slide-copy {
+    padding: clamp(24px, 2.4vw, 42px);
+    justify-content: center;
+  }
+
+  .visual-slide-copy .utility-line {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  .visual-slide-copy strong {
+    margin-top: 16px;
+    font-size: clamp(20px, 1.65vw, 26px);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .visual-slide-copy > span:not(.utility-line) {
+    margin-top: 16px;
+    font-size: clamp(13px, 1vw, 15px);
+    line-height: 1.8;
+  }
+
+  .visual-slide-copy > svg {
+    margin-top: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cover-hero--reference .cover-title {
+    font-size: clamp(34px, 10.2vw, 72px);
+  }
+
   .ending-visual {
-    height: auto;
-    aspect-ratio: 1106 / 390;
+    --ending-mobile-height: clamp(320px, min(52svh, 108vw), 480px);
+    --ending-artwork-width: calc(var(--ending-mobile-height) * 2.835897436);
+    height: var(--ending-mobile-height);
+    aspect-ratio: auto;
+  }
+
+  .ending-visual::after {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 35%, rgb(5 8 7 / 18%) 55%, rgb(5 8 7 / 86%) 100%);
+    pointer-events: none;
+    content: '';
   }
 
   .ending-artwork {
-    inset: 0;
-    width: auto;
+    inset: 0 auto auto;
+    /* Keep the photographic plane and its light masks at their original ratio. */
+    left: clamp(calc(100% - var(--ending-artwork-width)), calc(50% - var(--ending-artwork-width) * 0.691), 0px);
+    width: var(--ending-artwork-width);
+    height: var(--ending-mobile-height);
     transform: none;
   }
 
+  .ending-particle:nth-child(even) {
+    display: none;
+    animation: none;
+  }
+
   .ending-statement {
-    top: 18.7%;
-    bottom: auto;
-    left: 6.8%;
+    top: auto;
+    bottom: clamp(24px, 5vw, 36px);
+    left: 6.5%;
+    mix-blend-mode: normal;
   }
 
   .ending-quote {
-    width: 7.685cqw;
-    height: 7.05cqw;
-    margin-bottom: 0.6cqw;
-    background-size: 100cqw auto;
-    background-position: -6.87cqw -6.78cqw;
+    width: 32px;
+    height: 29.36px;
+    margin-bottom: 8px;
+    background-size: 416.4px auto;
+    background-position: -28.61px -28.23px;
   }
 
   .ending-statement h2 {
-    font-size: clamp(18px, 4.72cqw, 28px);
+    font-size: clamp(28px, 7.8vw, 46px);
     line-height: 1.35;
+    text-shadow: 0 2px 16px rgb(0 0 0 / 50%);
   }
 
   .ending-contact-shell {
-    padding-block: 10px 14px;
+    padding-block: 16px 14px;
   }
 
   .ending-contact-heading {
     gap: 8px;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
   }
 
   .ending-contact-shell h2 {
@@ -507,29 +562,24 @@
   }
 
   .ending-contact-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 20px;
   }
 
-  .ending-contact-grid > div,
-  .ending-contact-grid > div:first-child,
-  .ending-contact-grid > div:nth-child(odd),
-  .ending-contact-grid > div + div {
-    display: grid;
-    grid-template-columns: 64px minmax(0, 1fr);
-    gap: 12px;
-    align-items: center;
-    min-height: 38px;
-    padding: 7px 0;
+  .ending-contact-grid > div:nth-child(n) {
+    display: block;
+    min-height: 0;
+    padding: 10px 0;
     border-top: 0;
     border-left: 0;
   }
 
-  .ending-contact-grid > div:nth-child(n + 2) {
+  .ending-contact-grid > div:nth-child(n + 3) {
     border-top: 1px solid #55584e;
   }
 
   .ending-contact-grid dt {
-    margin: 0;
+    margin: 0 0 6px;
     font-size: 10px;
   }
 
@@ -537,23 +587,25 @@
     display: none;
   }
 
-  .ending-contact-grid dd,
-  .ending-contact-grid > div:last-child dd {
+  .ending-contact-grid dd {
     font-size: 14px;
     line-height: 1.5;
-    overflow-wrap: normal;
+    overflow-wrap: anywhere;
   }
 
-  .ending-contact-grid > div:last-child {
-    min-height: 44px;
-    padding-block: 0;
+  .ending-contact-grid > div:last-child dd {
+    font-size: clamp(12px, 2.6vw, 14px);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
   }
 
   .ending-contact-grid a {
-    display: inline-flex;
+    display: block;
     min-height: 44px;
-    align-items: center;
-    flex-wrap: wrap;
+  }
+
+  .ending-motion-toggle {
+    display: none;
   }
 
   .ending-bottom-row {
