@@ -52,6 +52,7 @@ export function Archive({ onOpen }: ArchiveProps) {
                   <button
                     key={work.id}
                     type="button"
+                    data-work-id={work.id}
                     className={`archive-item archive-item--${index < 3 ? 'lead' : 'row'} ${
                       work.cover ? '' : 'archive-item--text'
                     }`}

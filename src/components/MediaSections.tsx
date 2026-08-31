@@ -45,6 +45,7 @@ export function MediaSections({ onOpen }: MediaSectionsProps) {
               </span>
               <span className="lab-copy">
                 <strong>{work.title}</strong>
+                <span className="lab-summary">{work.summary}</span>
                 <small>{work.platform}</small>
               </span>
               <ArrowRight aria-hidden="true" />
