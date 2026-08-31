@@ -180,9 +180,18 @@ export function VisibilitySignal() {
         </div>
 
         <div className="cover-main">
-          <h1 id="cover-title" className="cover-title cover-enter cover-enter--3">
+          <h1 id="cover-title" className="cover-title cover-enter cover-enter--3" aria-label="让内容 被看见。">
             <span>让内容</span>
             <span>被看见。</span>
+            <img
+              className="cover-title-mobile"
+              src="/assets/visuals/hero-title-mobile.svg"
+              alt=""
+              aria-hidden="true"
+              width="1487"
+              height="344"
+              fetchPriority="high"
+            />
           </h1>
           <p className="cover-subtitle cover-enter cover-enter--5">
             好的内容不只是说了什么，还包括它如何被看到和记住
