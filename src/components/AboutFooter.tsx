@@ -75,7 +75,7 @@ export function AboutFooter() {
                   '--y': `${particle.y}%`,
                   '--duration': `${particle.duration}s`,
                   '--delay': `${particle.delay}s`,
-                  '--drift': `${particle.drift}px`,
+                  '--drift': `${particle.drift / 3.9}cqw`,
                 } as CSSProperties}
               />
             ))}

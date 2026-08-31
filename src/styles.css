@@ -3745,6 +3745,17 @@ iframe:focus-visible {
   line-height: 1.25;
 }
 
+@media (min-width: 861px) {
+  .archive-item[data-work-id='orange-revival'] .archive-copy {
+    container-type: inline-size;
+  }
+
+  .archive-item[data-work-id='orange-revival'] .archive-copy strong {
+    font-size: min(clamp(1.08rem, 1.65vw, 1.7rem), 10.2cqw);
+    white-space: nowrap;
+  }
+}
+
 .archive-summary {
   font-size: 0.88rem;
 }
@@ -3909,6 +3920,19 @@ iframe:focus-visible {
 
 .cross-media-section .cross-media-grid .lab-copy small {
   font-size: 0.74rem;
+}
+
+.cross-media-section .lab-summary {
+  margin-top: 0.65rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.cross-media-section .cross-media-item--2 .lab-summary,
+.cross-media-section .cross-media-item--3 .lab-summary {
+  color: #bdc6d6;
 }
 
 .cross-media-section .cross-media-item--2 .lab-copy small,
@@ -5505,10 +5529,12 @@ iframe:focus-visible {
   position: absolute;
   left: var(--x);
   top: var(--y);
-  width: 10px;
-  height: 10px;
+  width: 2.5641cqw;
+  height: 2.5641cqw;
   /* A real speck of light from the reference, not a drawn replacement. */
-  background: url('/assets/visuals/contact-hero-reference.jpg') -526px -314px / 1106px 390px no-repeat;
+  /* Scale the sprite and travel together, using a 390px-wide canvas as reference. */
+  background: url('/assets/visuals/contact-hero-reference.jpg') -134.8718cqw -80.5128cqw / 283.5897cqw 100cqw no-repeat;
+  mask-image: radial-gradient(circle, #000 25%, transparent 70%);
   filter: sepia(1) saturate(0.8);
   opacity: 0;
   animation: ending-particle-drift var(--duration) ease-in-out var(--delay) infinite;
@@ -5716,9 +5742,9 @@ iframe:focus-visible {
 }
 
 @keyframes ending-particle-drift {
-  0%, 100% { transform: translate3d(0, 8px, 0); opacity: 0.04; }
+  0%, 100% { transform: translate3d(0, 2.0513cqw, 0); opacity: 0.04; }
   35% { opacity: 0.45; }
-  70% { transform: translate3d(var(--drift), -12px, 0); opacity: 0.16; }
+  70% { transform: translate3d(var(--drift), -3.0769cqw, 0); opacity: 0.16; }
 }
 
 @media (prefers-reduced-motion: reduce) {
